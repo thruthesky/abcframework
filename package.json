@@ -1,0 +1,25 @@
+{
+  "name": "angular-builder-for-cordova",
+  "version": "0.0.1",
+  "description": "Angular Builder for Cordova",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thruthesky/angular-builder-for-cordova.git"
+  },
+  "keywords": [
+    "Angular",
+    "Build",
+    "for",
+    "Cordova"
+  ],
+  "author": "JaeHo Song",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thruthesky/angular-builder-for-cordova/issues"
+  },
+  "homepage": "https://github.com/thruthesky/angular-builder-for-cordova#readme"
+}
