@@ -1,9 +1,11 @@
 {
   "name": "angular-builder-for-cordova",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Angular Builder for Cordova",
   "main": "index.js",
-  "bin": { "abc": "./bin/abc.js" },
+  "bin": {
+    "abc": "./bin/abc.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
