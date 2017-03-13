@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/thruthesky/angular-builder-for-cordova/issues"
   },
-  "homepage": "https://github.com/thruthesky/angular-builder-for-cordova#readme"
+  "homepage": "https://github.com/thruthesky/angular-builder-for-cordova#readme",
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
 }
