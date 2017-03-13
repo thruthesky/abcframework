@@ -26,6 +26,6 @@
   },
   "homepage": "https://github.com/thruthesky/angular-builder-for-cordova#readme",
   "dependencies": {
-    "lodash": "^4.17.4"
+    "yargs": "^7.0.2"
   }
 }
