@@ -2,7 +2,7 @@
 
 'use strict';
 
-var MOCK_NPM_INSTALL = false;
+var MOCK_NPM_INSTALL = true;
 
 
 var os = require('os');
@@ -40,26 +40,26 @@ else {
 function install_abc() {
 
     var dst = argv._[1];
-    display_notice(` Installing ABC project.`);
+    display_notice(`Installing ABC project.`);
     
     
     let src = __dirname + '/../angular/v2.4';
 
 
-    display_notice(` Copying sources to ${dst}`);
+    display_notice(`Copying sources to ${dst}`);
 
     try {
         fs.copySync(src, dst);
-        display_notice(" Copy success!")
+        display_notice("Copy success!")
     } catch (err) {
         console.error(err)
     }
 
-    display_notice(` Change Directory: ${dst}`);
+    display_notice(`Change Directory: ${dst}`);
     // shell.cd( dst );
     process.chdir( dst );
     npm_install( code => {
-        display_notice(" npm install: done.");
+        display_notice("npm install: done.");
         setTimeout(() => {
             // ng_serve( code => {
             //     run_browser( code => {
@@ -76,7 +76,7 @@ function install_abc() {
 function npm_install(callback) {
 
     if ( MOCK_NPM_INSTALL ) {
-        display_notice(" Mocking npm install");
+        display_notice("Mocking npm install");
         return callback( 1 );
     }
     let ls = spawn('npm', ['install', '--verbose']);
@@ -97,7 +97,7 @@ function npm_install(callback) {
 function abc_serve( ) {
 
 
-    display_notice(` serving to browser ...`);
+    display_notice(`serving to browser ...`);
     
 
     let ls = spawn('ng', ['serve']);
@@ -115,7 +115,7 @@ function abc_serve( ) {
     });
 
     ls.on('close', (code) => {
-        display_notice(` ng serve exited with code ${code}`);
+        display_notice(`ng serve exited with code ${code}`);
         
     });
 
@@ -125,7 +125,7 @@ function abc_serve( ) {
 
 function run_browser() {
 
-    display_notice(" run browser...");
+    display_notice("run browser...");
     open("http://localhost:4200/");    
 }
 
@@ -223,7 +223,7 @@ function display_error( msg ) {
 
 function display_notice( msg ) {
     msg = msg;
-    console.log( chalk.blue( 'ABC: ' + msg ) );
+    console.log( chalk.green( 'ABC: ' + msg ) );
 }
 
 
@@ -233,6 +233,6 @@ function display_message_for_first_run() {
     let dst = argv._[1];
     display_notice("you have just installed ABC framework successfully");
     display_notice("to run your app, please do the following");
-    display_notice(`cd ${dst}; abc serve`);
+    display_notice(`type: "cd ${dst}" and type: "abc serve"`);
 }
 
