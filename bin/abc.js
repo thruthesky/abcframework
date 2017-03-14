@@ -3,7 +3,6 @@
 
 
 
-
 'use strict';
 
 var MOCK_NPM_INSTALL = true;
