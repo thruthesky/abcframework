@@ -5,7 +5,7 @@
 'use strict';
 
 var MOCK_NPM_INSTALL = true;
-var abc_version = '0.0.1';
+var abc_version = '0.1.2';
 
 
 var os = require('os');
