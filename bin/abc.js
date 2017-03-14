@@ -4,7 +4,7 @@
 
 'use strict';
 
-var MOCK_NPM_INSTALL = true;
+var MOCK_NPM_INSTALL = false;
 var abc_version = '0.1.2';
 
 
