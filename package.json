@@ -1,6 +1,6 @@
 {
   "name": "abcframework",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Angular Builder for Cordova",
   "main": "index.js",
   "bin": {
