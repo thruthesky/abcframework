@@ -1,5 +1,5 @@
 {
-  "name": "abc-framework",
+  "name": "abcframework",
   "version": "0.0.9",
   "description": "Angular Builder for Cordova",
   "main": "index.js",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/thruthesky/abc-framework"
+    "url": "git+https://github.com/thruthesky/abcframework"
   },
   "keywords": [
     "Angular",
@@ -22,9 +22,9 @@
   "author": "JaeHo Song",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/thruthesky/abc-framework/issues"
+    "url": "https://github.com/thruthesky/abcframework/issues"
   },
-  "homepage": "https://github.com/thruthesky/abc-framework#readme",
+  "homepage": "https://github.com/thruthesky/abcframework#readme",
   "dependencies": {
     "browser-run": "^4.0.1",
     "chalk": "^1.1.3",
