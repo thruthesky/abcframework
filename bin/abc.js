@@ -3,6 +3,7 @@
 'use strict';
 
 var MOCK_NPM_INSTALL = true;
+var abc_version = '0.0.1';
 
 
 var os = require('os');
@@ -27,12 +28,17 @@ process.title = 'abc';
 
 let command =  argv._[0];
 
-if ( command == 'new' ) install_abc();
+
+if ( argv.v ) display_version();
+else if ( argv.h ) display_help();
+else if ( command == 'new' ) install_abc();
 else if ( command == 'serve' ) abc_serve();
 else if ( command == 'platform' ) cordova_proxy();
 else if ( command == 'run' ) abc_run();
 else {
-    display_error(`The specified command ${argv._[0]} is invalid`);
+    if ( argv._[0] ) display_error(`The specified command ${argv._[0]} is invalid.`);
+    else display_notice(`Invalid command`);
+    display_notice(`Type "abc -h" for help message.`);
 }
 
 
@@ -217,13 +223,20 @@ function display_message( msg ) {
 }
 
 function display_error( msg ) {
-    let str = chalk.red('ABC ERROR: ') + msg + EOL;
+    let str = chalk.red('ABC ERROR: ') + msg;
     console.log(str);
 }
 
 function display_notice( msg ) {
     msg = msg;
     console.log( chalk.green( 'ABC: ' + msg ) );
+}
+
+
+
+
+function display_version() {
+    display_notice(abc_version);
 }
 
 
@@ -236,3 +249,10 @@ function display_message_for_first_run() {
     display_notice(`type: "cd ${dst}" and type: "abc serve"`);
 }
 
+
+function display_help() {
+    display_notice(`${abc_version}`);
+    display_notice(`serve`);
+    display_notice(`platform add|rm ios|android|browser`);
+    display_notice(`plugin add|rm ...`);
+}
