@@ -1,6 +1,6 @@
 # Angular Builder for Cordova
 
-`abc` cli will give you a greate convinient build Angular app into Cordova Android, iOS and browser app.
+`abc` cli will give you a great convenient  build Angular app into Cordova Android, iOS and browser app.
 
 
 
