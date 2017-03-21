@@ -64,7 +64,7 @@ $ abc run android
 
 # Developers
 
-## Settung Test Environment
+## Setting Test Environment
 
 Feel free to fork and pull request.
 
