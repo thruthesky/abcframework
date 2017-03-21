@@ -80,6 +80,6 @@ $ cd abc-test
 $ node ~/node/abcframework/bin/abc.js serve
 ````
 
-; you can edit abcframework/bin/abc.js and test
-; after build, commit and push
+* you can edit abcframework/bin/abc.js and test
+* after build, commit and push
 
