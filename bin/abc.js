@@ -27,6 +27,9 @@ var open = require("open");
 // Provide a title to the process in `abc`
 process.title = 'abc';
 
+var _count_run_browser = 0;
+
+
 
 let command =  argv._[0];
 
@@ -111,15 +114,23 @@ function abc_serve( ) {
     let ls = spawn('ng', ['serve']);
 
     ls.stdout.on('data', (data) => {
-        display_message(`${data}`);
-        if ( data.indexOf("successfully") != -1 ) {
+        data = data.toString(); // convert to string.
+        if ( data.indexOf("webpack: Compiled successfully.") != -1 ) {
             run_browser();
+            data = data.replace('webpack:', `webpack (${_count_run_browser+1}) :`);
+            // var time = (new Date).toLocaleTimeString();
+            // console.log("time: ", time);
+            // data = data.replace('.', ' at ' + time + '.');
+            _count_run_browser ++;
+
+            // console.log('data:', data);
         }
+        display_message(`${data}`);
+
     });
 
     ls.stderr.on('data', (data) => {
         display_message(`${data}`);
-
     });
 
     ls.on('close', (code) => {
@@ -131,8 +142,10 @@ function abc_serve( ) {
 }
 
 
-function run_browser() {
 
+
+function run_browser() {
+    if ( _count_run_browser ) return;
     display_notice("run browser...");
     open("http://localhost:4200/");    
 }
