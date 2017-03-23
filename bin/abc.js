@@ -1,27 +1,18 @@
 #!/usr/bin/env node
 
-
-
 'use strict';
 
 var MOCK_NPM_INSTALL = false;
 var abc_version = '0.1.2';
-
-
 var os = require('os');
 var EOL = os.EOL;
 var chalk = require('chalk');
 var S = require('string');
-
 const fs = require('fs-extra')
 var argv = require('yargs').argv;
 var shell = require('shelljs');
-
 const spawn = require('cross-spawn').spawn;
-
 var open = require("open");
-
-
 
 
 // Provide a title to the process in `abc`
@@ -184,7 +175,11 @@ function cordova_proxy() {
                 let msg = `${os} platform was not added.`;
                 display_notice( msg );
             }
+            else if ( command == 'run' ) {
+                let msg = `failed to run ${os}`;
+            }
             else {
+                let msg = "error";
                 display_error( msg );
             }
         }
@@ -199,7 +194,7 @@ function cordova_proxy() {
 }
 
 
-function pack( os, callback ) {
+function ng_build( os, callback ) {
     let proc;
     if ( os == 'ios' ) {
         proc = spawn( 'ng', ['build', '--base-href', 'www', '--output-path', 'www', '--sourcemap']);
@@ -225,8 +220,7 @@ function pack( os, callback ) {
 function abc_run() {
 
     let os = argv._[1];
-
-    pack( os, () => {
+    ng_build( os, () => {
         cordova_proxy();
     });
     

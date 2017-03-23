@@ -6,8 +6,28 @@
 
 # TODO
 
-* Code refactoring - Use Typescript.
+* Code refactoring for abc cli - Use Typescript.
 * Cordova browser platform support
+* Bundling Process
+    * Since app platform are completely different from web platform, there is no reason to follow/use Angular CLI.
+    * But what's the problem with it anyway?
+    * for cordova run/build
+        * watch source file change
+        * compile with Angular CLI
+        * Inject cordova js
+        * Inject live reload code
+        * patch base href
+        * Run cordova run/build OR live reload
+
+* Add Bootstrap, Font Awesome, Enhancer
+* Add angular-backend npm module.
+
+
+# Updating existing ABC project.
+
+* Install new ABC project.
+* Just copy src folder of OLD project into new project.
+
 
 
 # Installation
@@ -65,6 +85,15 @@ $ abc run android
 # Developers
 
 ## Setting Test Environment
+
+
+### Installation
+
+````
+npm install -g gulp-cli
+npm install typescript gulp gulp-typescript gulp-sourcemaps
+
+
 
 Feel free to fork and pull request.
 
