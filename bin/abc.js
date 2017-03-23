@@ -187,6 +187,7 @@ function cordova_proxy() {
             let acted = 'unknown action';
             if ( action == 'add' ) acted = 'added';
             else if ( action == 'rm' ) acted = 'remvoed';
+            else if ( action == 'run' ) acted = 'has run';
             display_notice(`${os} platform ${acted} successfully.`);
         }
     });
@@ -194,7 +195,7 @@ function cordova_proxy() {
 }
 
 
-function ng_build( os, callback ) {
+function ng_build_for_cordova( os, callback ) {
     let proc;
     if ( os == 'ios' ) {
         proc = spawn( 'ng', ['build', '--base-href', 'www', '--output-path', 'www', '--sourcemap']);
@@ -202,7 +203,11 @@ function ng_build( os, callback ) {
     else if ( os == 'android' ) {
         proc = spawn( 'ng', ['build', '--base-href', '/android_asset/www/', '--output-path', 'www', '--sourcemap']);
     }
+    else if ( os == 'browser' ) {
+        proc = spawn( 'ng', ['build', '--base-href', '/', '--output-path', 'www', '--sourcemap']);
+    }
 
+    if ( proc === void 0 ) return display_error(`Failed to created build process for ${os}. Check if ${os} is a supported platform and the platform is added to the project.`);
     proc.stdout.on('data', (data) => display_message(`${data}`) );
     proc.stderr.on('data', (data) => display_message(`${data}`) );
 
@@ -220,7 +225,7 @@ function ng_build( os, callback ) {
 function abc_run() {
 
     let os = argv._[1];
-    ng_build( os, () => {
+    ng_build_for_cordova( os, () => {
         cordova_proxy();
     });
     
