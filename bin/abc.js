@@ -102,12 +102,12 @@ function abc_serve( ) {
     display_notice(`serving to browser ...`);
     
 
-    let ls = spawn('ng', ['serve']);
+    let ls = spawn('ng', ['serve', '-o']);
 
     ls.stdout.on('data', (data) => {
         data = data.toString(); // convert to string.
         if ( data.indexOf("webpack: Compiled successfully.") != -1 ) {
-            run_browser();
+            //run_browser();
             data = data.replace('webpack:', `webpack (${_count_run_browser+1}) :`);
             // var time = (new Date).toLocaleTimeString();
             // console.log("time: ", time);
@@ -135,11 +135,11 @@ function abc_serve( ) {
 
 
 
-function run_browser() {
-    if ( _count_run_browser ) return;
-    display_notice("run browser...");
-    open("http://localhost:4200/");    
-}
+// function run_browser() {
+//     if ( _count_run_browser ) return;
+//     display_notice("run browser...");
+//     open("http://localhost:4200/");    
+// }
 
 
 

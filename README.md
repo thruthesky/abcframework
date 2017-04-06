@@ -6,7 +6,25 @@
 
 # TODO
 
-* Code refactoring for abc cli - Use Typescript.
+* ABC runs on Angular and Cordova. What ABC does;
+    1. Does NOT proxy any commands of Angular CLI or Cordova CLI.
+    2. Adds tools to make Angular App easy.
+
+    3. Add ABC Framework on an Angular project by "abc install"
+        This will created cordova project folders and config.xml to make cordova works with Angular.
+
+        Additional resources like bootstrap v4, font awesome, 'enhancer', 'angular-backend', etc will be installed from github.com.
+
+
+    4. Run app
+        $ cordova platform add "..."    // this will create cordova structure.
+        $ npm build ios
+        $ cordova run ios
+        $ abc run ios --live-reload
+
+    5. $ abc build android --icon --splash // will do jarsining, zipalign
+
+
 * Cordova browser platform support
 * Bundling Process
     * Since app platform are completely different from web platform, there is no reason to follow/use Angular CLI.

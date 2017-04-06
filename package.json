@@ -34,5 +34,6 @@
     "shelljs": "^0.7.7",
     "string": "^3.3.3",
     "yargs": "^7.0.2"
-  }
+  },
+  "devDependencies": {}
 }
