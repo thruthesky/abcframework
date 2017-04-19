@@ -15,7 +15,7 @@ const spawn = require('cross-spawn').spawn;
 
 
 
-console.info("argv: ", argv);
+// console.info("argv: ", argv);
 
 
 // Provide a title to the process in `abc`

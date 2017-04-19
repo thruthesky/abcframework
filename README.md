@@ -140,9 +140,12 @@ npm install typescript gulp gulp-typescript gulp-sourcemaps
 ## Publish
 
 ````
-git push
-npm version path
+git commit
+npm patch version
 npm publish
+npm uninstall -g abcframework
+npm install -g abcframwork
+abc version
 ````
 
 
