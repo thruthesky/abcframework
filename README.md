@@ -96,6 +96,31 @@ $ abc run android
 
 
 
+# Use
+
+## base href
+
+To change base-href, add `--base-href ...`
+
+$ abc run browser --base-href ./
+
+Run on 'browser' platform with <BASE HREF='./'>
+
+
+
+## aot
+
+To do aot, add `--aot` option.
+
+$ abc run browser --aot --base-href ./
+
+
+## Production mode
+
+To build a production app, add `--prod`
+
+$ abc run browser --base-href ./ --aot --prod
+
 
 
 
