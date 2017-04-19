@@ -141,10 +141,10 @@ npm install typescript gulp gulp-typescript gulp-sourcemaps
 
 ````
 git commit
-npm patch version
+npm version patch
 npm publish
 npm uninstall -g abcframework
-npm install -g abcframwork
+$ sudo npm install -g abcframework --verbose
 abc version
 ````
 
