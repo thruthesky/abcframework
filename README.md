@@ -135,6 +135,18 @@ $ abc run browser --base-href ./ --aot --prod
 ````
 npm install -g gulp-cli
 npm install typescript gulp gulp-typescript gulp-sourcemaps
+````
+
+## Publish
+
+````
+git push
+npm version path
+npm publish
+````
+
+
+### Cooperate
 
 
 
