@@ -76,7 +76,7 @@ abc.init = function() {
 
 
 abc.run = function() {
-
+    abc.ngBuild = null;
     var os = abc.getOs();
 
     if ( ! os ) throw new Error("OS is not provided.");
@@ -85,7 +85,9 @@ abc.run = function() {
 
     let o = [
         'build',
-        '-w',
+        '--watch',
+        // '--output-hashing=all',             // output-hashing 을 하면 안된다. 이렇게 하면, 다시 APK 를 푸시해야 한다.
+        //'--verbose',
         '--base-href', abc.getBaseHref(),
         '--output-path', 'www',
         '--sourcemap'
@@ -99,24 +101,56 @@ abc.run = function() {
 
     
     if ( proc === void 0 ) return abc.error(`Failed to created build process for ${os}. Check if ${os} is a supported platform and the platform is added to the project.`);
-    proc.stdout.on('data', (data) => {
+    proc.stdout.on( 'data', abc.watchOut );
+    proc.stderr.on( 'data', abc.watchOut );
+    proc.on('close', (code) => { }); // watch 를 하므로, 프로세스가 종료되지 않는다.
+
+}
+
+abc.watchOut = function( data ) {
         var s = data.toString();
         abc.stdout( s );
-        if ( s.indexOf( "inline.bundle.js" ) != -1 ) {
+        
+        // if ( s.indexOf( "inline.bundle.js" ) != -1 ) {
+        //     // abc.runCordova();
+        //     // abc.ngBuildFinished();
+        // }
+        // else 
+        
+        if ( s.indexOf( "ERROR in" ) != -1 ) {
+            abc.ngBuild = 'error';
+            //
+            
+            
+            s = chalk.reset( s );
+            //var msg = /(ERROR in .*)/.exec(s);
+
+            arr = String(s).split( 'ERROR in ');
+            
+
+            abc.ngBuildError = 'ERROR in ' + arr[1];
+            abc.ngBuildFinished();
+            
+        }
+
+        else if ( s.indexOf("chunk") != -1 && /inline(.*)bundle.js/.test( s ) ) {
+            abc.ngBuildFinished();
+        }
+}
+
+abc.ngBuildFinished = function() {
+    var b = abc.ngBuild;
+    abc.notice("angular build finished " + ( b ? "with error" : "without error"));
+    if ( b ) abc.error( abc.ngBuildError );
+
+        if ( abc.ngBuild == 'error' ) {
+            if ( io ) io.emit('error', abc.ngBuildError );
+        }
+        else {
             abc.runCordova();
         }
-    } );
-    proc.stderr.on('data', (data) => abc.stdout(`${data}`) );
-
-    proc.on('close', (code) => {
-        if ( code ) {
-            abc.error( 'build failed.' );
-        }
-        // else {
-        //     abc.runCordova();
-        // }
-    });
-
+    abc.ngBuild = null;
+    abc.ngBuildError = null;
 }
 
 abc.runServer = function() {
@@ -149,25 +183,20 @@ abc.patchIndex = function() {
     
     var address = abc.getAddress();
     var patch = `
-
-<style>
-#reloadError {
-  padding: 16px;
-  background-color: black;
-  color: white;
-  font-size: 16px;
-}
-</style>
 <script src="http://${address}/socket.io/socket.io.js"></script>
 <script>
-  console.log("Going to connect io: ${address}");
+  console.log("Connect to desktop server through socket.io: ${address}");
   var socket = io('http://${address}');
-  
   socket.on('reload', function (data) {
     console.log(data);
-    //socket.emit('my other event', { my: 'data' });
-    //window.location.reload(true);
-    location.href="index.html";
+    // window.location.reload(true);
+    location.href="index.html?dummy=" + ( new Date ).getTime(); // dummy 값을 주어서, 새로 내용을 불러온다. 주의: hard-cache-clear 가 아니기 때문에 새로운 .js .css 가 로드되지 않을 수 있다.
+  });
+  socket.on('error', function (data) {
+    console.error(data);
+    // window.location.reload(true);
+    // location.href="index.html";
+    alert( data );
   });
 
 
@@ -176,12 +205,12 @@ abc.patchIndex = function() {
     var index = fs.readFileSync('www/index.html');
     var content = String(index);
 
-    content = content.replace("inline.bundle.js", "http://"+address+"/inline.bundle.js");
-    content = content.replace("polyfills.bundle.js", "http://"+address+"/polyfills.bundle.js");
-    content = content.replace("styles.bundle.js", "http://"+address+"/styles.bundle.js");
-    content = content.replace("vendor.bundle.js", "http://"+address+"/vendor.bundle.js");
-    content = content.replace("main.bundle.js", "http://"+address+"/main.bundle.js");
-    // console.log(content);
+    content = content.replace(/inline(.*)bundle.js/, "http://"+address+'/inline$1bundle.js');
+    content = content.replace(/polyfills(.*)bundle.js/, "http://"+address+"/polyfills$1bundle.js");
+    content = content.replace(/styles(.*)bundle.js/, "http://"+address+"/styles$1bundle.js");
+    content = content.replace(/vendor(.*)bundle.js/, "http://"+address+"/vendor$1bundle.js");
+    content = content.replace(/main(.*)bundle.js/, "http://"+address+"/main$1bundle.js");
+    abc.debug(content);
 
     content = content.replace("</body>", patch + "\n</body>");
     fs.writeFileSync('www/index.html', content);
@@ -198,11 +227,11 @@ abc.runCordova = function() {
     abc.runServer();
 
     let proc = spawn( 'cordova', argv._ );
+    proc.stdout.on( 'data', abc.watchOut );
+    proc.stderr.on( 'data', abc.watchOut );
+
     let os = abc.getOs();
 
-    proc.stdout.on('data', (data) => {
-        abc.stdout(`${data}`);
-    });
 
     proc.on('close', (code) => {
         if ( code ) { // true if error.

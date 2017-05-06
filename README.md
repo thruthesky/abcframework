@@ -6,8 +6,10 @@
 
 # TODO
 
-* 클라이언트에서 exception 에러는 error handler 로 처리한다.
-* ng server 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
+* 문서화: 클라이언트에서 exception 에러는 error handler 로 처리한다.
+* ng serve 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
+* cordova.js 추가를 한다.
+
 
 
 
@@ -39,6 +41,10 @@ For Linux/Mac users may need root permisson.
 
 
 # ABC
+
+As of 0.3.x, ABC only focus on debugging.
+So, when you run ABC, it automaitically does livereloading.
+
 
 
 ## Options
@@ -101,9 +107,13 @@ $ cordova platform add android
 ### Run app into device with live reload.
 
 ````
-$ abc run ios
-$ abc run android
+$ abc run android --address=10.0.2.2:3000
+$ abc run android --address=10.0.2.2:3000 -d    // run with debug message.
 ````
+
+The above exmaple uses default 'base href' but other resources like css, js comes from 'http://10.0.2.2:3000' where the local desktop server is running.
+
+
 
 
 
