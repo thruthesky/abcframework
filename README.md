@@ -107,9 +107,14 @@ $ cordova platform add android
 ### Run app into device with live reload.
 
 ````
-$ abc run android --address=10.0.2.2:3000
+$ abc run android --address=10.0.2.2:3000       // From the view of android device, you need to connect to 10.0.2.2:3000 to get to the local desktop server.
 $ abc run android --address=10.0.2.2:3000 -d    // run with debug message.
+$ abc run browser --address=localhost:3000      // From the view of browser, you need to connect to localhost:3000 to get to the local desktop server.
+$ abc run ios --address=localhost:3000          // From the view of iOS emulator, you need to connect to localhost:3000 to get to the local desktop server.
 ````
+
+* Before you do `abc run android ...`, you need to run Android emulator or connect a Android device.
+* If you do `abc run ios ...`, iOS emulatory may run automatically on MacOS.
 
 The above exmaple uses default 'base href' but other resources like css, js comes from 'http://10.0.2.2:3000' where the local desktop server is running.
 
