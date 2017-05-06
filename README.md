@@ -6,39 +6,12 @@
 
 # TODO
 
-* ABC runs on Angular and Cordova. What ABC does;
-    1. Does NOT proxy any commands of Angular CLI or Cordova CLI.
-    2. Adds tools to make Angular App easy.
-
-    3. Add ABC Framework on an Angular project by "abc install"
-        This will created cordova project folders and config.xml to make cordova works with Angular.
-
-        Additional resources like bootstrap v4, font awesome, 'enhancer', 'angular-backend', etc will be installed from github.com.
+* 클라이언트에서 exception 에러는 error handler 로 처리한다.
+* ng server 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
 
 
-    4. Run app
-        $ cordova platform add "..."    // this will create cordova structure.
-        $ npm build ios
-        $ cordova run ios
-        $ abc run ios --live-reload
-
-    5. $ abc build android --icon --splash // will do jarsining, zipalign
 
 
-* Cordova browser platform support
-* Bundling Process
-    * Since app platform are completely different from web platform, there is no reason to follow/use Angular CLI.
-    * But what's the problem with it anyway?
-    * for cordova run/build
-        * watch source file change
-        * compile with Angular CLI
-        * Inject cordova js
-        * Inject live reload code
-        * patch base href
-        * Run cordova run/build OR live reload
-
-* Add Bootstrap, Font Awesome, Enhancer
-* Add angular-backend npm module.
 
 
 # Updating existing ABC project.
@@ -64,28 +37,68 @@ For Linux/Mac users may need root permisson.
 
 
 
-# How to use ABC Framework
 
-## Create a new project
+# ABC
+
+
+## Options
+
+* `-h, --help` shows help message.
+* `-d, --debug` shows debug message.
+* `--bash-href` changes BASE HREF="....".
+
+To change base-href, add `--base-href ...`
+
+$ abc run browser --base-href ./
+
+Run on 'browser' platform with <BASE HREF='./'>
+
+
+* `--address` changes local desktop server address.
+
+
+* `--aot` compiles as in AoT.
+
+To do aot, add `--aot` option.
 
 ````
-$ abc new folder-name
+$ abc run browser --aot --base-href ./
 ````
 
-## Serving it to browser
+
+
+
+
+## Usecase
+
+### Create a new project
 
 ````
-$ abc serve
+$ ng new project-name
 ````
 
-## Addung platforms
+### Serving it to browser
 
 ````
-$ abc platform add ios
-$ abc platform add android
+$ ng serve
 ````
 
-## Run app into platforms
+
+### Adding Cordova to Angular Project
+
+````
+$ abc run init
+````
+
+
+### Addung platforms
+
+````
+$ cordova platform add ios
+$ cordova platform add android
+````
+
+### Run app into device with live reload.
 
 ````
 $ abc run ios
@@ -96,31 +109,6 @@ $ abc run android
 
 
 
-# Use
-
-## base href
-
-To change base-href, add `--base-href ...`
-
-$ abc run browser --base-href ./
-
-Run on 'browser' platform with <BASE HREF='./'>
-
-
-
-## aot
-
-To do aot, add `--aot` option.
-
-$ abc run browser --aot --base-href ./
-
-
-## Production mode
-
-To build a production app, add `--prod`
-
-$ abc run browser --base-href ./ --aot --prod
-
 
 
 
@@ -130,7 +118,7 @@ $ abc run browser --base-href ./ --aot --prod
 ## Setting Test Environment
 
 
-### Installation
+## Installation
 
 ````
 npm install -g gulp-cli
@@ -149,7 +137,17 @@ abc version
 ````
 
 
-### Cooperate
+## Test
+
+To test, before publish, you can do below.
+
+````
+$ sudo ln -s /Users/thruthesky/node/abcframework/bin/abc.js /usr/local/bin/abc
+$ abc
+````
+
+
+## Cooperate
 
 
 
