@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-    templateUrl: 'file-not-found.html'
+    templateUrl: 'about.html'
 })
 
-export class FileNotFoundPage implements OnInit {
+export class AboutPage implements OnInit {
     constructor() { }
 
     ngOnInit() { }

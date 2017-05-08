@@ -1,6 +1,27 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+$gutter: 8px;
+$page-width: 1140px;
+
+$header-height: 68px;
+body {
+    margin-top: $header-height + $gutter!important;
+}
+
+
+section.page {
+    margin: 0 auto;
+    padding: 0 $gutter;
+    max-width: $page-width;
+
+    @media all and (min-width: $page-width) {
+        padding: 0;
+    }
+}
+
+
+
 #custom-error-handler {
     position: absolute;
     z-index: 987654321;

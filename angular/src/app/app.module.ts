@@ -7,21 +7,25 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomErrorHandler } from './app.error-handler';
 import { AbcComponents } from './abc-components/abc-components.module';
 
+import { App } from './services/app';
+
+
 import { AppComponent } from './app.component';
 
 import { HomePage } from './pages/home/home';
-import { FileNotFoundPage } from './pages/file-not-found/file-not-found';
+import { AboutPage } from './pages/about/about';
 
 const appRoutes: Routes = [
+  { path: 'about', component: AboutPage },
   { path: '', component: HomePage, pathMatch: 'full' },
-  { path: '**', component: FileNotFoundPage }
+  { path: '**', component: HomePage }
 ]
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePage,
-    FileNotFoundPage
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -31,6 +35,7 @@ const appRoutes: Routes = [
     AbcComponents
   ],
   providers: [
+    App,
     { provide: ErrorHandler, useClass: CustomErrorHandler }
   ],
   bootstrap: [AppComponent]

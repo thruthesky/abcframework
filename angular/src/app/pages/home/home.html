@@ -1,12 +1,26 @@
-<h1>Home</h1>
+<abc-header></abc-header>
+<section class="page">
+
+  <div class="jumbotron">
+    <h1 class="display-3">Hi, I am ABC!</h1>
+    <p class="lead">
+      I can help you making apps as easy as A! B! C!
+      Just follow the steps and you are there already!
+      Oh, don't miss video tutorials.
+      And we welcome supporters in anyway like tutorial documentating, Q&amp;A Forum management and business partners.
+      </p>
+    <p>
+      <a class="btn btn-success" href="/about" role="button">Read more</a>
+    </p>
+  </div>
 
 
+  <p *ngIf="device">
+    You are on {{ device.platform }} platform.
+  </p>
 
-<p *ngIf="device">
-  앱이 {{ device.platform }} 에서 실행중입니다.
-</p>
 
+  공식 사이트 : www.abcframework.com
+  
 
-공식 사이트 : www.abcframework.com<br>
-공식 카페 : www.angularstudy.com<br>
-공식 문서 : http://...<br>
+</section>

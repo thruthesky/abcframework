@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { App } from './services/app';
 declare var device;
 @Component({
   selector: 'app-root',
@@ -6,14 +7,15 @@ declare var device;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  device;
-  constructor() {
+  constructor(
+    public app: App
+  ) {
     document.addEventListener('deviceready', () => this.onDeviceReady(), false);
   }
 
   onDeviceReady() {
     console.log("Cordova is ready.");
     // console.log(device.cordova);
-    this.device = device;
+    this.app.device = device;
   }
 }

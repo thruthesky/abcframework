@@ -24,7 +24,8 @@ abc.start = function () {
 
     abc.debug(`abc begins with `, argv);
     if (abc.isHelp()) return Q.fcall(abc.help);
-    else if (abc.isInit()) return Q.fcall(abc.init);
+    //else if (abc.isInit()) return Q.fcall(abc.init);
+    else if (abc.isNew()) return abc.create();
     else if (abc.isRun()) return Q.fcall(abc.run);
     else return Q.fcall(abc.unknwonTask);
 
@@ -71,9 +72,62 @@ abc.init = function () {
         throw new Error(err);
     };
 
-
 }
 
+abc.create = function() {
+
+    var deferred = Q.defer();
+    abc.notice("Creating new porject.");
+    let src = __dirname + '/angular';
+    var dst = argv._[1];
+
+    try {
+        fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
+    }
+    catch ( err ) {
+        deferred.reject( new Error( err ) ); // error.
+    }
+    abc.notice(`Installing npm modules on ${dst} for abc.`);
+
+    process.chdir( dst );
+    abc.npmInstall( code => {
+        abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
+        deferred.resolve();
+    });
+
+    return deferred.promise;
+}
+
+/**
+ * @note when you work on 'abc framework', you do not need to copy these files.
+ */
+abc.npmInstallFilter = function ( src, dst ) {
+    if ( src.indexOf("node_modules") != -1 ) return false;
+    if ( src.indexOf("platforms") != -1 ) return false;
+    if ( src.indexOf("plugins") != -1 ) return false;
+    return true;
+}
+
+abc.npmInstall = function(callback) {
+
+    if ( abc.isDry() ) {
+        abc.notice("--dry: skip npm install");
+        return callback( 1 );
+    }
+    let ls = spawn('npm', ['install', '--verbose']);
+
+    ls.stdout.on('data', (data) => {
+        abc.message(`${data}`);
+    });
+
+    ls.stderr.on('data', (data) => {
+        abc.message(`${data}`);
+    });
+
+    ls.on('close', (code) => {
+        callback( code );
+    });
+}
 
 abc.run = function () {
     abc.ngBuild = null;
@@ -283,7 +337,7 @@ abc.notice = (msg) => {
 
 abc.message = function (msg, ...rest) {
     if (rest.length == 0) rest = '';
-    console.log(msg, rest);
+    abc.stdout(msg, rest);
 }
 
 abc.error = function (msg) {
@@ -303,8 +357,14 @@ abc.debug = function (msg) {
 abc.isHelp = function () {
     if (argv.help || argv.h) return true;
 };
-abc.isInit = function () {
-    return Array.from(argv._).findIndex(v => v == 'init') != -1;
+// abc.isInit = function () {
+//     return Array.from(argv._).findIndex(v => v == 'init') != -1;
+// };
+abc.isNew = function () {
+    return argv._.includes( 'new' );
+};
+abc.isDry = function () {
+    return argv.dry;
 };
 abc.isRun = function () { return argv._[0] == 'run'; }
 abc.isDebug = function () { if (argv.debug || argv.d) return true; }

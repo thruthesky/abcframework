@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AbcHeader implements OnInit {
+
+    logged: boolean = true;
+    showMenu: boolean = false;
+
     constructor() { }
 
     ngOnInit() { }

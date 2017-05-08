@@ -4,6 +4,7 @@ export class CustomErrorHandler implements ErrorHandler {
     constructor() { }
     handleError(error) {
 
+
         this.displayError( error );
 
 

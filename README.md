@@ -7,9 +7,17 @@
 # TODO
 
 
+* global custom error handler 가 build time 에러와 컴포넌트 selector 이름을 잘못 적은 경우 에러를 표시하지 못한다.
+
+* 에러 표시 함수를 abc cli 에 만 넣는다. ionic 이 그렇게 하고 있다.
+
+    https://github.com/driftyco/ionic/blob/master/src/util/ionic-error-handler.ts
+
 * -v, --version 라면, package.json 의 버전을 가져와서 보여 줄 것.
 
-* --address=localhost:3000 와 같이 하는데, 3000 은 고정이므로 없어도 된다. 따라서 없애버린다.
+* 안드로이드에서 기본적으로 --address=10.0.2.2 가되도록 한다.
+
+* 그 외의 ip, port 의 경우 변경 할 수 있도록 한다.
 
 * 에러 처리를 사용자에게 직접 하게 할 수 없다.
     https://github.com/thruthesky/abcframework/issues/5
@@ -24,6 +32,15 @@
 * 문서화: 클라이언트에서 exception 에러는 error handler 로 처리한다.
 * ng serve 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
 * cordova.js 추가를 한다.
+
+
+# Changes
+
+
+## 0.4
+
+
+* `abc init` is gone.
 
 
 
@@ -78,8 +95,6 @@ $ abc run browser --base-href ./
 Run on 'browser' platform with <BASE HREF='./'>
 
 
-* `--address` changes local desktop server address.
-
 
 * `--aot` compiles as in AoT.
 
@@ -89,7 +104,13 @@ To do aot, add `--aot` option.
 $ abc run browser --aot --base-href ./
 ````
 
+* `--dry` does not install npm modules
 
+It is useful when you do installation test.
+
+````
+$ abc new a2 --dry
+````
 
 
 
@@ -98,7 +119,7 @@ $ abc run browser --aot --base-href ./
 ### Create a new project
 
 ````
-$ ng new project-name
+$ abc new project-name
 ````
 
 ### Serving it to browser
@@ -107,24 +128,13 @@ $ ng new project-name
 $ ng serve
 ````
 
-
-### Adding Cordova to Angular Project
-
-````
-$ abc run init
-````
-
-
-### Addung platforms
+### Serving it to device; Run app into device with live reload.
 
 ````
-$ cordova platform add ios
+$ cordova platform add browser
 $ cordova platform add android
-````
+$ cordova platform add ios
 
-### Run app into device with live reload.
-
-````
 $ abc run android --address=10.0.2.2:3000       // From the view of android device, you need to connect to 10.0.2.2:3000 to get to the local desktop server.
 $ abc run android --address=10.0.2.2:3000 -d    // run with debug message.
 $ abc run browser --address=localhost:3000      // From the view of browser, you need to connect to localhost:3000 to get to the local desktop server.

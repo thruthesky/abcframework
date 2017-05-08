@@ -1,1 +1,103 @@
-Easy as ABC !
+<header>
+    <nav class="bg-slategrey white text-center">
+        <div class="content d-flex justify-content-between">
+            <div class="left pointer" routerLink="/">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                    <i class="fa fa-home fa-stack-1x slategrey" aria-hidden="true"></i>
+                </span>
+                <div class="text">Home</div>
+            </div>
+            <div class="center d-flex align-items-center">
+                <div class="pointer" routerLink="/">
+                    <h1>ABC</h1>
+                </div>
+            </div>
+            <div class="right">
+
+                <ul class="list-style-none list-float-left pointers">
+
+                    <!--<li class="mr-2">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                            <i class="fa fa-bars fa-stack-1x slategrey" aria-hidden="true"></i>
+                        </span>
+                        <div class="text">Name</div>
+                    </li>-->
+
+                    <li (click)=" showMenu = ! showMenu ">
+                        <span class="fa-stack fa-lg">
+                            <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                            <i class="fa fa-bars fa-stack-1x slategrey" aria-hidden="true"></i>
+                        </span>
+                        <div class="text">Menu</div>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+</header>
+
+<section class="panel" [class.active]=" showMenu ">
+
+    <nav class="bg-silver">
+        <ul class="content clearfix pl-2 pl-xl-0 list-style-none list-float-left fs-08em text-center pointers">
+            <li *ngIf=" logged " routerLink="/login">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+                    <i class="fa fa-sign-in fa-stack-1x snow" aria-hidden="true"></i>
+                </span>
+                <div class="text">Login</div>
+            </li>
+            <li *ngIf=" logged " (click)=" user.logout(); " routerLink="/">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+                    <i class="fa fa-sign-out fa-stack-1x snow" aria-hidden="true"></i>
+                </span>
+                <div class="text">Logout</div>
+            </li>
+            <li *ngIf=" logged " routerLink="/register">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-user-plus fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Register</div>
+            </li>
+            <li *ngIf=" logged " routerLink="/profile">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-user fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Profile</div>
+            </li>
+
+            <li *ngIf=" logged " routerLink="/password">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-lock fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Password</div>
+            </li>
+
+
+            <li routerLink="/forum/test">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-comment fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Forum</div>
+            </li>
+
+
+            <li *ngIf=" logged ">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-gear fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Dashboard</div>
+            </li>
+
+        </ul>
+    </nav>
+</section>
