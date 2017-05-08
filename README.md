@@ -85,6 +85,10 @@ So, when you run ABC, it automaitically does livereloading.
 * `-d, --debug` shows debug message.
 * `--bash-href` changes BASE HREF="....".
 * `--address` is the address where local desktop test webserver is running. Cordova app will connect to this address.
+    * default address is
+        * 'localhost' for browser and ios
+        * '10.0.2.2' for andriod
+    
 * `--port` is the port of the local desktop server port.
 
 
