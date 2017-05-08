@@ -1,0 +1,95 @@
+
+/**
+ *
+ *      U T I L I T I E S
+ *
+ */
+.box-shadow {
+  box-shadow: 0 1px 1px rgba( 0, 0, 0, 0.1 );
+}
+
+// extention of mt-*
+.margin-top-4 { margin-top: 4em; }
+.margin-top-5 { margin-top: 5em; }
+.margin-top-6 { margin-top: 6em; }
+
+
+.list-style-none {
+  @include list-style-none();
+}
+
+.list-float-left {
+  @include list-float-left();
+}
+
+
+// For container, it is not easy to remove all spaces. Use this to remove all spaces of container.
+.no-space {
+  margin: 0!important;
+  padding: 0!important;
+  width: 100%;
+  & > .row {
+    margin: 0!important;
+    padding: 0!important;
+    & > [class^="col"] {
+      margin: 0!important;
+      padding: 0!important;
+    }
+  }
+}
+
+//
+.pointer {
+  cursor: pointer;
+}
+
+.pointers {
+  &>div, &>span, &>li {
+    cursor: pointer;
+  }
+}
+
+
+// butons
+.buttons {
+  & > div, & > span {
+    cursor: pointer;
+  }
+}
+
+
+//
+.z-index-high {
+  z-index: 987654321;
+}
+.z-index-medium {
+  z-index: 87654321;
+}
+.z-index-low {
+  z-index: 7654321;
+}
+.z-index {
+  z-index: 654321;
+}
+
+
+// borders.
+// https://v4-alpha.getbootstrap.com/utilities/borders/
+//
+// bb-x: border bottom with {x}px.
+// @see color.scss for border colors.
+.bb-1 {
+  border-bottom: 1px solid;
+}
+.bb-2 {
+  border-bottom: 1px solid;
+}
+
+
+// spacing
+// @use-case: <ul class="p-2s">...</ul>
+.p-2s {
+  &>div, &>span, &>li {
+    padding: .5em;
+  }
+}

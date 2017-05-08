@@ -1,0 +1,11 @@
+@mixin list-style-none() { // for ul, ol
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+@mixin list-float-left() {
+  li {
+    float: left;
+  }
+}

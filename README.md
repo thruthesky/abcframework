@@ -6,6 +6,21 @@
 
 # TODO
 
+
+* -v, --version 라면, package.json 의 버전을 가져와서 보여 줄 것.
+
+* --address=localhost:3000 와 같이 하는데, 3000 은 고정이므로 없어도 된다. 따라서 없애버린다.
+
+* 에러 처리를 사용자에게 직접 하게 할 수 없다.
+    https://github.com/thruthesky/abcframework/issues/5
+
+    * boostrap + font-awesome + enhancer
+    * 아이오닉과 같은 컴포넌트 중 아주, .. 가장. ..., 매우.... 기본적인 컴포넌트를 몇개 제공. 예) 상단 메뉴, 하단 메뉴, 슬라이딩 서브 패널 메뉴.
+    * 기본 코딩 제공. 예) Live Reload 에서 에러메세지 표시.
+    * firebase 와 완벽하게 결합
+    * PHP 기반 Backend 를 Firebase Database 버전으로 작성. ( PHP 기본 SQL Backend 는 대형 커뮤니티 서비스에 반드시 필요. )
+
+
 * 문서화: 클라이언트에서 exception 에러는 error handler 로 처리한다.
 * ng serve 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
 * cordova.js 추가를 한다.
@@ -52,6 +67,9 @@ So, when you run ABC, it automaitically does livereloading.
 * `-h, --help` shows help message.
 * `-d, --debug` shows debug message.
 * `--bash-href` changes BASE HREF="....".
+* `--address` is the address where local desktop test webserver is running. Cordova app will connect to this address.
+* `--port` is the port of the local desktop server port.
+
 
 To change base-href, add `--base-href ...`
 
@@ -120,6 +138,18 @@ The above exmaple uses default 'base href' but other resources like css, js come
 
 
 
+# Desktop Server Connection
+
+* If you have nginx webserver on your desktop and you want to access it from Android emualtor, you can just access through "http://10.0.2.2/..."
+
+For instance, you have a "Backend" running on your desktop, you need to set web server to accept IP as server name(domain) and let the webserver to point the root directory to backend.
+
+and on your Angular code, simple set the url of "Backend"
+````
+backend.setBackendUrl("http://10.0.2.2/index.php");
+````
+
+
 
 
 
@@ -136,8 +166,7 @@ The above exmaple uses default 'base href' but other resources like css, js come
 ## Installation
 
 ````
-npm install -g gulp-cli
-npm install typescript gulp gulp-typescript gulp-sourcemaps
+git clone https://github.com/thruthesky/abcframework
 ````
 
 ## Publish
@@ -152,14 +181,24 @@ abc version
 ````
 
 
-## Test
+## Working and Test with ABC
 
 To test, before publish, you can do below.
 
 ````
+$ sudo npm uninstall -g abcframework
 $ sudo ln -s /Users/thruthesky/node/abcframework/bin/abc.js /usr/local/bin/abc
 $ abc
 ````
+
+## Working and Test with an app
+
+Create an Angular test app and play with it.
+
+````
+$ ng new abc-test-app
+````
+
 
 
 ## Cooperate

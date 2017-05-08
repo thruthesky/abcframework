@@ -1,0 +1,15 @@
+
+.progress-group {
+  position: relative;
+  margin-bottom: $margin-bottom;
+
+  .text {
+    display: block;
+    float: left;
+  }
+  .number {
+    display: block;
+    text-align: right;
+  }
+
+}
