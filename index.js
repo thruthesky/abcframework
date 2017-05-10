@@ -90,10 +90,12 @@ abc.init = function () {
  * @note when you work on 'abc framework', you do not need to copy these files.
  */
 abc.npmInstallFilter = function ( src, dst ) {
-    if ( src.indexOf("node_modules") >= 0 ) return false;
-    if ( src.indexOf("platforms") >= 0 ) return false;
-    if ( src.indexOf("plugins") >= 0 ) return false;
-    if ( src.indexOf("www") >= 0 ) return false; 
+
+    var c = src.substr( src.indexOf('angular') );
+    if ( c.indexOf("node_modules") >= 0 ) return false;
+    if ( c.indexOf("platforms") >= 0 ) return false;
+    if ( c.indexOf("plugins") >= 0 ) return false;
+    if ( c.indexOf("www") >= 0 ) return false; 
     return true;
 }
 
