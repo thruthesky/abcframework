@@ -17,13 +17,21 @@
 
                 <ul class="list-style-none list-float-left pointers">
 
-                    <!--<li class="mr-2">
+                    <li class="mr-2" *ngIf="app.logged">
                         <span class="fa-stack fa-lg">
-                            <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
-                            <i class="fa fa-bars fa-stack-1x slategrey" aria-hidden="true"></i>
+                            
+                            <ng-container *ngIf=" app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+                                <img class="fa fa-stack-1x" style="padding: 2px 0 0 3px; width: 34px; border-radius: 50%;" src="{{ app.user.photoURL }}">
+                            </ng-container>
+                            <ng-container  *ngIf=" ! app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fa fa-user fa-stack-1x slategrey" aria-hidden="true"></i>
+                            </ng-container>
+                            
                         </span>
-                        <div class="text">Name</div>
-                    </li>-->
+                        <div class="text">{{ app.user.displayName }}</div>
+                    </li>
 
                     <li (click)=" showMenu = ! showMenu ">
                         <span class="fa-stack fa-lg">
@@ -43,28 +51,28 @@
 
     <nav class="bg-silver">
         <ul class="content clearfix pl-2 pl-xl-0 list-style-none list-float-left fs-08em text-center pointers">
-            <li *ngIf=" logged " routerLink="/login">
+            <li *ngIf=" ! app.logged " routerLink="/login">
                 <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
                     <i class="fa fa-sign-in fa-stack-1x snow" aria-hidden="true"></i>
                 </span>
                 <div class="text">Login</div>
             </li>
-            <li *ngIf=" logged " (click)=" user.logout(); " routerLink="/">
+            <li *ngIf=" app.logged " (click)=" onClickLogout() ">
                 <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
                     <i class="fa fa-sign-out fa-stack-1x snow" aria-hidden="true"></i>
                 </span>
                 <div class="text">Logout</div>
             </li>
-            <li *ngIf=" logged " routerLink="/register">
+            <li *ngIf=" ! app.logged " routerLink="/register">
                 <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
         <i class="fa fa-user-plus fa-stack-1x snow" aria-hidden="true"></i>
       </span>
                 <div class="text">Register</div>
             </li>
-            <li *ngIf=" logged " routerLink="/profile">
+            <li *ngIf=" app.logged " routerLink="/profile">
                 <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
         <i class="fa fa-user fa-stack-1x snow" aria-hidden="true"></i>
@@ -72,7 +80,7 @@
                 <div class="text">Profile</div>
             </li>
 
-            <li *ngIf=" logged " routerLink="/password">
+            <li *ngIf=" app.logged " routerLink="/password">
                 <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
         <i class="fa fa-lock fa-stack-1x snow" aria-hidden="true"></i>
@@ -90,13 +98,33 @@
             </li>
 
 
-            <li *ngIf=" logged ">
+            <li routerLink="/forum/test">
                 <span class="fa-stack fa-lg">
         <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
-        <i class="fa fa-gear fa-stack-1x snow" aria-hidden="true"></i>
+        <i class="fa fa-comment fa-stack-1x snow" aria-hidden="true"></i>
       </span>
-                <div class="text">Dashboard</div>
+                <div class="text">Q&amp;A</div>
             </li>
+
+
+            <li routerLink="/forum/test">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-comment fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Discussion</div>
+            </li>
+
+
+            <li routerLink="/forum/test" (click)=" showMenu = ! showMenu ">
+                <span class="fa-stack fa-lg">
+        <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+        <i class="fa fa-times fa-stack-1x snow" aria-hidden="true"></i>
+      </span>
+                <div class="text">Close</div>
+            </li>
+
+
 
         </ul>
     </nav>

@@ -1,5 +1,11 @@
+/**
+ * @todo check if the device is online( has internet connection )
+ * 
+ * 
+ */
 import { Component } from '@angular/core';
 import { App } from './services/app';
+
 declare var device;
 @Component({
   selector: 'app-root',
@@ -10,6 +16,7 @@ export class AppComponent {
   constructor(
     public app: App
   ) {
+    app.loginCheck();
     document.addEventListener('deviceready', () => this.onDeviceReady(), false);
   }
 

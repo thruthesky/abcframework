@@ -10,7 +10,8 @@ body {
 }
 
 
-section.page {
+ng-component {
+    display: block;
     margin: 0 auto;
     padding: 0 $gutter;
     max-width: $page-width;
@@ -18,7 +19,12 @@ section.page {
     @media all and (min-width: $page-width) {
         padding: 0;
     }
+
+    .title {
+        font-size: 3em;
+    }
 }
+
 
 
 

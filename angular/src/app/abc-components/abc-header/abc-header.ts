@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { App } from './../../services/app';
 
 @Component({
     selector: 'abc-header',
@@ -8,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
 
 export class AbcHeader implements OnInit {
 
-    logged: boolean = true;
     showMenu: boolean = false;
 
-    constructor() { }
+    constructor(
+        public app: App,
+        public router: Router
+    ) { }
 
     ngOnInit() { }
+
+
+    onClickLogout() {
+        this.app.logout(() => {
+            console.log("user logged out.");
+            this.router.navigateByUrl('/');
+        });
+    }
 }

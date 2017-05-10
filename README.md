@@ -6,8 +6,10 @@
 
 # TODO
 
+* move issues to github and follow milestone.
 
-* global custom error handler 가 build time 에러와 컴포넌트 selector 이름을 잘못 적은 경우 에러를 표시하지 못한다.
+* abcframework.com 을 backend 와 연동하여 사이트를 만들고 발표를 한다.
+
 
 * 에러 표시 함수를 abc cli 에 만 넣는다. ionic 이 그렇게 하고 있다.
 
@@ -15,24 +17,28 @@
 
 * -v, --version 라면, package.json 의 버전을 가져와서 보여 줄 것.
 
-* 안드로이드에서 기본적으로 --address=10.0.2.2 가되도록 한다.
+* @done  안드로이드에서 기본적으로 --address=10.0.2.2 가되도록 한다.
 
 * 그 외의 ip, port 의 경우 변경 할 수 있도록 한다.
 
-* 에러 처리를 사용자에게 직접 하게 할 수 없다.
-    https://github.com/thruthesky/abcframework/issues/5
-
-    * boostrap + font-awesome + enhancer
-    * 아이오닉과 같은 컴포넌트 중 아주, .. 가장. ..., 매우.... 기본적인 컴포넌트를 몇개 제공. 예) 상단 메뉴, 하단 메뉴, 슬라이딩 서브 패널 메뉴.
-    * 기본 코딩 제공. 예) Live Reload 에서 에러메세지 표시.
-    * firebase 와 완벽하게 결합
-    * PHP 기반 Backend 를 Firebase Database 버전으로 작성. ( PHP 기본 SQL Backend 는 대형 커뮤니티 서비스에 반드시 필요. )
-
 
 * 문서화: 클라이언트에서 exception 에러는 error handler 로 처리한다.
-* ng serve 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
-* cordova.js 추가를 한다.
+* @done ng serve 과정에서 bootstrap 에서 발생하는 에러는 socket 으로 에러를 화면에 표시해 준다.
+* global custom error handler 가 build time 에러와 컴포넌트 selector 이름을 잘못 적은 경우 에러를 표시하지 못한다. 보완 필요
+    * build 과정에서 에러가 나는 것은 아닌데, custom error handler 가 등록되기 전에발생하는 에러를 못잡는 것 같다.
+* @done cordova.js 추가를 한다.
 
+* SEO 에 대한 검토. 당장 하지 않는다. 간단한 해결책이 없다. 정안되면 Backend 를 사용하도록 한다.
+
+* Firebase Authentication
+    * firebase User Authentication 에서 Google Login 앱 아이디는 thruthesky@withcenter.com 이다. 혹시 lock 될 지 몰라서, 다른 계정을 해 놓았다.
+    * facebook 앱 아이디는는+63... 현영 아이디로 해 놓았다.
+    * firebase 에서 제공하는 모든 auth provider 를 다 적용한다.
+    * cordova 에서 사용 할 수 있도록 한다.
+    * email/password 회원 등록, 관리를 할 수 있도록 한다.
+    * 추가적으로 instagram, naver id login, kakao talk 로그인 만든다. ( 간단하게 할 수 있는 기능이 없는 것 같다. 별도 서버 작업이 필요한가? 이러한 서버 작업 서비스만 따로 해 주는 곳은? Auth0 ?? )
+    * 배포 할 때에는 직접 입력을 하게 한다.
+* internet connection check thru javascript.
 
 # Changes
 
@@ -164,6 +170,16 @@ backend.setBackendUrl("http://10.0.2.2/index.php");
 ````
 
 
+
+
+# Things to know
+
+
+* one platform may work as live reload for case like below.
+    * abc run android
+    * quit
+    * abc run ios
+    * then, when you edit source code, android will do live-reload as ios do.
 
 
 
