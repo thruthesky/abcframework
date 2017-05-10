@@ -26,10 +26,15 @@ abc.start = function () {
     if (abc.isHelp()) return Q.fcall(abc.help);
     //else if (abc.isInit()) return Q.fcall(abc.init);
     else if (abc.isNew()) return abc.create();
+    else if (abc.isCopyNodeModules() ) return Q.fcall(abc.copyNodeModules);
     else if (abc.isRun()) return Q.fcall(abc.run);
     else return Q.fcall(abc.unknwonTask);
 
+
+
 }
+
+
 
 abc.version = function () {
     return '20170505';
@@ -98,6 +103,22 @@ abc.create = function() {
     return deferred.promise;
 }
 
+abc.copyNodeModules = function() {
+    
+    abc.notice("Copying node_modules folder");
+    let src = __dirname + '/angular/node_modules';
+    var dst = './node_modules';
+
+    try {
+        fs.copySync( src, dst );
+    }
+    catch ( err ) {
+        deferred.reject( new Error( err ) ); // error.
+    }
+    abc.notice(`done.`);
+}
+
+
 /**
  * @note when you work on 'abc framework', you do not need to copy these files.
  */
@@ -105,13 +126,19 @@ abc.npmInstallFilter = function ( src, dst ) {
     if ( src.indexOf("node_modules") != -1 ) return false;
     if ( src.indexOf("platforms") != -1 ) return false;
     if ( src.indexOf("plugins") != -1 ) return false;
+
+
+    /**
+     * Below copies 'www' folder but does not copy all of its contents.
+     */
+    if ( src.indexOf("www/") != -1 ) return false; // @see https://docs.google.com/document/d/1kpPIG3iTVy2RjhzP9xuLMiKR_q9fnQcs8F5iOmCW25A/edit#heading=h.4hkc9gfjpit4
     return true;
 }
 
 abc.npmInstall = function(callback) {
 
-    if ( abc.isDry() ) {
-        abc.notice("--dry: skip npm install");
+    if ( abc.skipNpmInstall() ) {
+        abc.notice("--skip-npm-install: skip npm install");
         return callback( 1 );
     }
     let ls = spawn('npm', ['install', '--verbose']);
@@ -128,6 +155,7 @@ abc.npmInstall = function(callback) {
         callback( code );
     });
 }
+
 
 abc.run = function () {
     abc.ngBuild = null;
@@ -361,10 +389,13 @@ abc.isHelp = function () {
 //     return Array.from(argv._).findIndex(v => v == 'init') != -1;
 // };
 abc.isNew = function () {
-    return argv._.includes( 'new' );
+    return argv._[0] == 'new';
 };
-abc.isDry = function () {
-    return argv.dry;
+abc.isCopyNodeModules = function () {
+    return argv._[0] == 'copy-node-modules'
+};
+abc.skipNpmInstall = function () {
+    return argv['skip-npm-install'];
 };
 abc.isRun = function () { return argv._[0] == 'run'; }
 abc.isDebug = function () { if (argv.debug || argv.d) return true; }

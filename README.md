@@ -16,11 +16,33 @@
 # Changes
 
 
-## 0.4
+* `abc new project-name --skip-npm-install` skips npm install
+
+This is good for just getting source code without installing npm node modules since `npm install` takes internet bandwidth.
+This is especially useful when you are using limited bandwidth internet.
 
 
-* `abc init` is gone.
+* `abc copy-node-modules` copies node_modules from `abcframework` work folder.
+You may use it command to copy node_modules folder from `abcframework` work folder to your project that was installed with `--skip-npm-install` option.
+Doing this, npm will not install its dependencies instead, it copies from abc work folder benefitting not consuming internet bandwidth.
 
+This is only available when you are working on abcframework.
+
+
+Example of usage)
+
+````
+$ abc new a4 --skip-npm-install
+$ cd a4
+$ abc copy-node-modules
+$ ng serve
+$ cordova platform add browser
+$ cordova platform add android
+$ cordova platform add ios
+$ abc run browser
+$ abc run android
+$ abc run ios
+````
 
 
 
