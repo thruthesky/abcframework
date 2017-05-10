@@ -24,6 +24,7 @@ import { HomePage } from './pages/home/home';
 import { AboutPage } from './pages/about/about';
 import { LoginPage } from './pages/login/login';
 import { RegisterPage } from './pages/register/register';
+import { ProfilePage } from './pages/profile/profile';
 
 
 // angulare fire 2
@@ -36,6 +37,7 @@ import { environment } from '../environments/environment';
 const appRoutes: Routes = [
   { path: 'login', component: LoginPage },
   { path: 'register', component: RegisterPage },
+  { path: 'profile', component: ProfilePage },
   { path: 'about', component: AboutPage },
   { path: '', component: HomePage, pathMatch: 'full' },
   { path: '**', component: HomePage }
@@ -47,7 +49,8 @@ const appRoutes: Routes = [
     HomePage,
     AboutPage,
     LoginPage,
-    RegisterPage
+    RegisterPage,
+    ProfilePage
   ],
   imports: [
     BrowserModule,
