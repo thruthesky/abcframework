@@ -181,18 +181,53 @@ backend.setBackendUrl("http://10.0.2.2/index.php");
 
 
 
-# Developers
+# For ABC Developers
+
+If you want to edit abc framework on your own, please don't hesitate.
 
 ## Setting Test Environment
 
 
-## Installation
+### Installation
+
+You can install abc like below
 
 ````
 git clone https://github.com/thruthesky/abcframework
+cd abcframework
+npm install
 ````
 
+Or, you can fork into your account and clone it from your account.
+
+
+
+### Working and Test with ABC
+
+To work and test with abc framework, simply remove globally installed abcframework and link abcframework/bin/abc.js to /usr/local/bin/abc or any place of your environmental path.
+
+````
+$ sudo npm uninstall -g abcframework
+$ sudo ln -s /Users/thruthesky/node/abcframework/bin/abc.js /usr/local/bin/abc
+$ abc new project-name
+$ cd project-anme
+$ ng serve
+````
+
+You can edit abc.js and index.js under "abcframework/bin/" folder and test it.
+
+
+
+### Reporting issues and enhancement.
+
+You can create an issue on [abcframework git issue](https://github.com/thruthesky/abcframework/issues) or feel free to fork and pull request.
+
+
+
+
 ## Publish
+
+Only core developers can publish to npmjs.org
 
 ````
 git commit
@@ -202,46 +237,3 @@ npm uninstall -g abcframework
 $ sudo npm install -g abcframework --verbose
 abc version
 ````
-
-
-## Working and Test with ABC
-
-To test, before publish, you can do below.
-
-````
-$ sudo npm uninstall -g abcframework
-$ sudo ln -s /Users/thruthesky/node/abcframework/bin/abc.js /usr/local/bin/abc
-$ abc
-````
-
-## Working and Test with an app
-
-Create an Angular test app and play with it.
-
-````
-$ ng new abc-test-app
-````
-
-
-
-## Cooperate
-
-
-
-Feel free to fork and pull request.
-
-````
-$ cd ~/work
-$ git clone https://github.com/thruthesky/abcframework
-$ cd abcframework
-$ npm install
-
-$ cd ~/work
-$ node ~/work/abcframework/bin/abc.js new abc-test
-$ cd abc-test
-$ node ~/node/abcframework/bin/abc.js serve
-````
-
-* you can edit abcframework/bin/abc.js and test
-* after build, commit and push
-
