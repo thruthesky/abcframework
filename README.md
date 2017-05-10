@@ -24,9 +24,10 @@ With `abc` you can build Angular app as easy as A! B! C!.
 # Installation
 
 ````
-$ npm install -g abcframework
+$ npm install -g abcframework --verbose
 ````
-For Linux/Mac users may need root permisson.
+For Linux/Mac users may need use `sudo` to install globally.
+
 
 # Update
 

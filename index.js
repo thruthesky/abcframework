@@ -79,6 +79,29 @@ abc.init = function () {
 
 }
 
+
+
+
+
+
+
+
+/**
+ * @note when you work on 'abc framework', you do not need to copy these files.
+ */
+abc.npmInstallFilter = function ( src, dst ) {
+    if ( src.indexOf("node_modules") >= 0 ) return false;
+    if ( src.indexOf("platforms") >= 0 ) return false;
+    if ( src.indexOf("plugins") >= 0 ) return false;
+
+
+    /**
+     * Below copies 'www' folder but does not copy all of its contents.
+     */
+    if ( src.indexOf("www/") >= 0 ) return false; // @see https://docs.google.com/document/d/1kpPIG3iTVy2RjhzP9xuLMiKR_q9fnQcs8F5iOmCW25A/edit#heading=h.4hkc9gfjpit4
+    return true;
+}
+
 abc.create = function() {
 
     var deferred = Q.defer();
@@ -91,10 +114,10 @@ abc.create = function() {
         abc.notice(`Going to copy files from ${src} to ${dst}`);
         fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
         if ( fs.existsSync( dst ) ) {
-            console.log("file copied");
+            abc.notice("File copied");
          }
         else {
-            console.log("failed to copy files");
+            abc.error("Failed to copy files");
             deferred.reject( new Error(`${dst} does not exists`) );
             return deferred.promise;
         }
@@ -114,6 +137,10 @@ abc.create = function() {
     return deferred.promise;
 }
 
+
+
+
+
 abc.copyNodeModules = function() {
     
     abc.notice("Copying node_modules folder");
@@ -130,21 +157,6 @@ abc.copyNodeModules = function() {
 }
 
 
-/**
- * @note when you work on 'abc framework', you do not need to copy these files.
- */
-abc.npmInstallFilter = function ( src, dst ) {
-    if ( src.indexOf("node_modules") != -1 ) return false;
-    if ( src.indexOf("platforms") != -1 ) return false;
-    if ( src.indexOf("plugins") != -1 ) return false;
-
-
-    /**
-     * Below copies 'www' folder but does not copy all of its contents.
-     */
-    if ( src.indexOf("www/") != -1 ) return false; // @see https://docs.google.com/document/d/1kpPIG3iTVy2RjhzP9xuLMiKR_q9fnQcs8F5iOmCW25A/edit#heading=h.4hkc9gfjpit4
-    return true;
-}
 
 abc.npmInstall = function(callback) {
 
