@@ -1,49 +1,14 @@
-# Angular Builder for Cordova
+# ABC Framework
 
-`abc` cli will give you a great convenient  build Angular app into Cordova Android, iOS and browser app.
+Abc framework is a tool for building apps with Angular 2+.
+`abc` is short for 'Angular Builder for Cordova' and is combination of open sources.
 
+With `abc` you can build Angular app as easy as A! B! C!.
 
 
 # TODO
 
 @refer [ABC framework git issue](https://github.com/thruthesky/abcframework/issues)
-
-* How will Angular handle SEO?
-    * at worst, use [Backend](https://github.com/thruthesky/backend)
-
-* internet connection check thru javascript.
-
-# Changes
-
-
-* `abc new project-name --skip-npm-install` skips npm install
-
-This is good for just getting source code without installing npm node modules since `npm install` takes internet bandwidth.
-This is especially useful when you are using limited bandwidth internet.
-
-
-* `abc copy-node-modules` copies node_modules from `abcframework` work folder.
-You may use it command to copy node_modules folder from `abcframework` work folder to your project that was installed with `--skip-npm-install` option.
-Doing this, npm will not install its dependencies instead, it copies from abc work folder benefitting not consuming internet bandwidth.
-
-This is only available when you are working on abcframework.
-
-
-Example of usage)
-
-````
-$ abc new a4 --skip-npm-install
-$ cd a4
-$ abc copy-node-modules
-$ ng serve
-$ cordova platform add browser
-$ cordova platform add android
-$ cordova platform add ios
-$ abc run browser
-$ abc run android
-$ abc run ios
-````
-
 
 
 
@@ -116,6 +81,39 @@ It is useful when you do installation test.
 ````
 $ abc new a2 --dry
 ````
+
+
+
+
+* `abc new project-name --skip-npm-install` skips npm install
+
+This is good for just getting source code without installing npm node modules since `npm install` takes internet bandwidth.
+This is especially useful when you are using limited bandwidth internet.
+
+
+* `abc copy-node-modules` copies node_modules from `abcframework` work folder.
+You may use it command to copy node_modules folder from `abcframework` work folder to your project that was installed with `--skip-npm-install` option.
+Doing this, npm will not install its dependencies instead, it copies from abc work folder benefitting not consuming internet bandwidth.
+
+This is only available when you are working on abcframework.
+
+
+Example of usage)
+
+````
+$ abc new a4 --skip-npm-install
+$ cd a4
+$ abc copy-node-modules
+$ ng serve
+$ cordova platform add browser
+$ cordova platform add android
+$ cordova platform add ios
+$ abc run browser
+$ abc run android
+$ abc run ios
+````
+
+
 
 
 
