@@ -86,11 +86,22 @@ abc.create = function() {
     let src = __dirname + '/angular';
     var dst = argv._[1];
 
-    try {
+
+   try {
+        abc.notice(`Going to copy files from ${src} to ${dst}`);
         fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
+        if ( fs.existsSync( dst ) ) {
+            console.log("file copied");
+         }
+        else {
+            console.log("failed to copy files");
+            deferred.reject( new Error(`${dst} does not exists`) );
+            return deferred.promise;
+        }
     }
     catch ( err ) {
         deferred.reject( new Error( err ) ); // error.
+        return deferred.promise;
     }
     abc.notice(`Installing npm modules on ${dst} for abc.`);
 

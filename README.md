@@ -218,6 +218,28 @@ You can edit abc.js and index.js under "abcframework/bin/" folder and test it.
 
 
 
+### Debug with VSCode
+
+You can debug with vscode.
+
+Sample of launch.json
+
+````
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "node",
+            "request": "launch",
+            "name": "Launch Program",
+            "program": "${workspaceRoot}/bin/abc.js",
+            "args": [ "new", "/Users/thruthesky/tmp/abc2", "--skip-npm-install"]
+        }
+    ]
+}
+````
+
+
 ### Reporting issues and enhancement.
 
 You can create an issue on [abcframework git issue](https://github.com/thruthesky/abcframework/issues) or feel free to fork and pull request.
@@ -233,7 +255,12 @@ Only core developers can publish to npmjs.org
 git commit
 npm version patch
 npm publish
-npm uninstall -g abcframework
-$ sudo npm install -g abcframework --verbose
+sudo npm uninstall -g abcframework
+sudo npm install -g abcframework --verbose
 abc version
+abc new project-name
+cd project-name
+ng serve
+cordova platform add browser
+abc run browser
 ````
