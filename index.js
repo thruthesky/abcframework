@@ -93,12 +93,7 @@ abc.npmInstallFilter = function ( src, dst ) {
     if ( src.indexOf("node_modules") >= 0 ) return false;
     if ( src.indexOf("platforms") >= 0 ) return false;
     if ( src.indexOf("plugins") >= 0 ) return false;
-
-
-    /**
-     * Below copies 'www' folder but does not copy all of its contents.
-     */
-    if ( src.indexOf("www/") >= 0 ) return false; // @see https://docs.google.com/document/d/1kpPIG3iTVy2RjhzP9xuLMiKR_q9fnQcs8F5iOmCW25A/edit#heading=h.4hkc9gfjpit4
+    if ( src.indexOf("www") >= 0 ) return false; 
     return true;
 }
 
@@ -114,7 +109,8 @@ abc.create = function() {
         abc.notice(`Going to copy files from ${src} to ${dst}`);
         fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
         if ( fs.existsSync( dst ) ) {
-            abc.notice("File copied");
+            fs.ensureDirSync(`${dst}/www`);
+            abc.notice("ABC base files are copied.");
          }
         else {
             abc.error("Failed to copy files");
@@ -127,6 +123,7 @@ abc.create = function() {
         return deferred.promise;
     }
     abc.notice(`Installing npm modules on ${dst} for abc.`);
+
 
     process.chdir( dst );
     abc.npmInstall( code => {
