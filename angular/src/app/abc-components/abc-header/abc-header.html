@@ -17,9 +17,8 @@
 
                 <ul class="list-style-none list-float-left pointers">
 
-                    <li class="mr-2" *ngIf="app.logged">
+                    <li class="mr-2" *ngIf="app.logged" routerLink="/profile">
                         <span class="fa-stack fa-lg">
-                            
                             <ng-container *ngIf=" app.user.photoURL ">
                                 <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
                                 <img class="fa fa-stack-1x" style="padding: 2px 0 0 3px; width: 34px; border-radius: 50%;" src="{{ app.user.photoURL }}">
