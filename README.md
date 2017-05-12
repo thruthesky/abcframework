@@ -1,27 +1,38 @@
+![Abc framework](https://raw.githubusercontent.com/wiki/thruthesky/abcframework/front-title.jpg)
+
 # ABC Framework
 
-Abc framework is a tool for building apps with Angular 2+.
-`abc` is short for 'Angular Builder for Cordova' and is combination of open sources.
-
-With `abc` you can build Angular app as easy as A! B! C!.
+Abc framework is a tool that give you a greate convenience on building apps with Angular 2+. With `abc` you can build Angular app as easy as A! B! C!.
 
 
-# TODO
+# Open source
 
-@refer [ABC framework git issue](https://github.com/thruthesky/abcframework/issues)
+Abc framework is open sourced under [MIT License](https://github.com/thruthesky/abcframework/blob/master/License.md). Please help us by using, commenting, bug reporting.
 
-
-
-
-
-# Updating existing ABC project.
-
-* Install new ABC project.
-* Just copy src folder of OLD project into new project.
+* Do you need a help? - [ABC framework - Git Help Wanted](https://github.com/thruthesky/abcframework/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22)
+* Found a bug? or suggestions? -  [ABC framework - Git Issues](https://github.com/thruthesky/abcframework/issues)
 
 
+## Help wanted
 
-# Installation
+* We are in need of help for improving ABC framework. Please do not hesitating to join abc community. Whether you are a developer/designer/planner or even a runner, feel free to participate in anyway you can. Reporting typo erros or requesting for better documentating may be one way. You can send us a logo icon, or any opinion to make it better.
+
+
+# Installation &amp; Update
+
+## Prerequisites
+
+Before you are going to install abc, you have to install Angular CLI and Cordova.
+
+````
+npm install -g @angular/cli
+npm install -g cordova
+````
+
+Note: If you are on Linux/Mac, you may need to use `[sudo]` to install them globally.
+
+## Installation
+
 
 ````
 $ npm install -g abcframework --verbose
@@ -31,26 +42,25 @@ For Linux/Mac users may need use `sudo` to install globally.
 
 # Update
 
+Simply uninstall and install again.
+
 ````
-$ npm update -g abcframework
+npm uninstall -g abcframework
+npm update -g abcframework
 ````
-For Linux/Mac users may need root permisson.
 
 
+# ABC Options
 
-
-# ABC
-
-As of 0.3.x, ABC only focus on debugging.
-So, when you run ABC, it automaitically does livereloading.
-
-
-
-## Options
 
 * `-h, --help` shows help message.
 * `-d, --debug` shows debug message.
-* `--bash-href` changes BASE HREF="....".
+* `--bash-href` Base url for the application being built.
+````
+$ abc run browser --base-href ./
+````
+
+
 * `--address` is the address where local desktop test webserver is running. Cordova app will connect to this address.
     * default address is
         * 'localhost' for browser and ios
@@ -59,40 +69,30 @@ So, when you run ABC, it automaitically does livereloading.
 * `--port` is the port of the local desktop server port.
 
 
-To change base-href, add `--base-href ...`
 
-$ abc run browser --base-href ./
-
-Run on 'browser' platform with <BASE HREF='./'>
-
-
-
-* `--aot` compiles as in AoT.
-
-To do aot, add `--aot` option.
+* `--aot` Build using Ahead of Time compilation.
 
 ````
 $ abc run browser --aot --base-href ./
 ````
 
-* `--dry` does not install npm modules
-
-It is useful when you do installation test.
+* `--dry` does not install npm modules. It is useful when you do installation test.
 
 ````
 $ abc new a2 --dry
 ````
 
-
-
-
-* `abc new project-name --skip-npm-install` skips npm install
+* `--skip-npm-install` skips npm install
 
 This is good for just getting source code without installing npm node modules since `npm install` takes internet bandwidth.
 This is especially useful when you are using limited bandwidth internet.
 
+````
+$ abc new project-name --skip-npm-install
+````
 
-* `abc copy-node-modules` copies node_modules from `abcframework` work folder.
+
+* `copy-node-modules` copies node_modules from `abcframework` work folder.
 You may use it command to copy node_modules folder from `abcframework` work folder to your project that was installed with `--skip-npm-install` option.
 Doing this, npm will not install its dependencies instead, it copies from abc work folder benefitting not consuming internet bandwidth.
 
@@ -128,19 +128,30 @@ $ abc new project-name
 
 ### Serving it to browser
 
+Simply use Angular CLI for whatever you want.
+
 ````
 $ ng serve
 ````
 
-### Serving it to device; Run app into device with live reload.
+### Serving it to device
+
+By default, abc works with live reloading.
 
 ````
 $ cordova platform add browser
 $ cordova platform add android
 $ cordova platform add ios
 
-$ abc run android --address=10.0.2.2:3000       // From the view of android device, you need to connect to 10.0.2.2:3000 to get to the local desktop server.
-$ abc run android --address=10.0.2.2:3000 -d    // run with debug message.
+$ abc run browser
+$ abc run android
+$ abc run ios
+````
+
+You can add options.
+
+````
+$ abc run android --address=10.0.2.2:3000 -d       // From the view of android device, you need to connect to 10.0.2.2:3000 to get to the local desktop server. -d is for debug message.
 $ abc run browser --address=localhost:3000      // From the view of browser, you need to connect to localhost:3000 to get to the local desktop server.
 $ abc run ios --address=localhost:3000          // From the view of iOS emulator, you need to connect to localhost:3000 to get to the local desktop server.
 ````
@@ -148,19 +159,14 @@ $ abc run ios --address=localhost:3000          // From the view of iOS emulator
 * Before you do `abc run android ...`, you need to run Android emulator or connect a Android device.
 * If you do `abc run ios ...`, iOS emulatory may run automatically on MacOS.
 
-The above exmaple uses default 'base href' but other resources like css, js comes from 'http://10.0.2.2:3000' where the local desktop server is running.
-
-
 
 # Desktop Server Connection
 
-* If you have nginx webserver on your desktop and you want to access it from Android emualtor, you can just access through "http://10.0.2.2/..."
+* If you have any (web) server on your desktop and you want to access it from device(Android emualtor), you can just access through "http://10.0.2.2/..." or whatever IP. You may need to set web server configuration to accept the ip from the device.
 
-For instance, you have a "Backend" running on your desktop, you need to set web server to accept IP as server name(domain) and let the webserver to point the root directory to backend.
-
-and on your Angular code, simple set the url of "Backend"
+on Angular code, simple connect like below.
 ````
-backend.setBackendUrl("http://10.0.2.2/index.php");
+http.get("http://10.0.2.2/...");
 ````
 
 
@@ -169,99 +175,16 @@ backend.setBackendUrl("http://10.0.2.2/index.php");
 # Things to know
 
 
-* one platform may work as live reload for case like below.
+* one `abc run` may server many platforms.
+
     * abc run android
     * quit
     * abc run ios
-    * then, when you edit source code, android will do live-reload as ios do.
+    * then, when you edit source code, android will do live-reload as do ios.
 
 
 
 
+# For core developers
 
-
-
-
-# For ABC Developers
-
-If you want to edit abc framework on your own, please don't hesitate.
-
-## Setting Test Environment
-
-
-### Installation
-
-You can install abc like below
-
-````
-git clone https://github.com/thruthesky/abcframework
-cd abcframework
-npm install
-````
-
-Or, you can fork into your account and clone it from your account.
-
-
-
-### Working and Test with ABC
-
-To work and test with abc framework, simply remove globally installed abcframework and link abcframework/bin/abc.js to /usr/local/bin/abc or any place of your environmental path.
-
-````
-$ sudo npm uninstall -g abcframework
-$ sudo ln -s /Users/thruthesky/node/abcframework/bin/abc.js /usr/local/bin/abc
-$ abc new project-name
-$ cd project-anme
-$ ng serve
-````
-
-You can edit abc.js and index.js under "abcframework/bin/" folder and test it.
-
-
-
-### Debug with VSCode
-
-You can debug with vscode.
-
-Sample of launch.json
-
-````
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Launch Program",
-            "program": "${workspaceRoot}/bin/abc.js",
-            "args": [ "new", "/Users/thruthesky/tmp/abc2", "--skip-npm-install"]
-        }
-    ]
-}
-````
-
-
-### Reporting issues and enhancement.
-
-You can create an issue on [abcframework git issue](https://github.com/thruthesky/abcframework/issues) or feel free to fork and pull request.
-
-
-
-
-## Publish
-
-Only core developers can publish to npmjs.org
-
-````
-git commit
-npm version patch
-npm publish
-sudo npm uninstall -g abcframework
-sudo npm install -g abcframework --verbose
-abc version
-abc new project-name
-cd project-name
-ng serve
-cordova platform add browser
-abc run browser
-````
+To become core developer, please refer [for core developer](https://github.com/thruthesky/abcframework/wiki/core-developer).
