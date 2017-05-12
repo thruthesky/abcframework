@@ -5,6 +5,11 @@
 Abc framework is a tool that give you a greate convenience on building apps with Angular 2+. With `abc` you can build Angular app as easy as A! B! C!.
 
 
+Youtube video tutorial)
+
+[![Everything Is AWESOME](https://img.youtube.com/vi/nN3ifO_c05I/0.jpg)](https://www.youtube.com/watch?v=nN3ifO_c05I "Everything Is AWESOME")
+
+
 # Open source
 
 Abc framework is open sourced under [MIT License](https://github.com/thruthesky/abcframework/blob/master/License.md). Please help us by using, commenting, bug reporting.
