@@ -1,4 +1,39 @@
-<abc-header></abc-header>
+<abc-header class="home">
+  <div class="p-2" routerLink="/">
+    <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+          <i class="fa fa-home fa-stack-1x" aria-hidden="true"></i>
+      </span>
+  </div>
+
+  <div class="center d-flex align-items-center">
+    <div class="pointer" routerLink="/">
+      <h1>ABC</h1>
+    </div>
+  </div>
+
+  <div class="right p-2">
+      <span class="user-icon mr-2" *ngIf="app.logged" routerLink="/profile">
+        <span class="fa-stack fa-lg" title="{{ app.user.displayName }}">
+                            <ng-container *ngIf=" app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x slategrey" aria-hidden="true"></i>
+                                <img class="fa fa-stack-1x" style="padding: 2px 0 0 3px; width: 34px; border-radius: 50%;" src="{{ app.user.photoURL }}">
+                            </ng-container>
+                            <ng-container  *ngIf=" ! app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fa fa-user fa-stack-1x slategrey" aria-hidden="true"></i>
+                            </ng-container>
+                        </span>
+      </span>
+
+      <span (click)=" showMenu = ! showMenu ">
+        <span class="fa-stack fa-lg">
+              <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+              <i class="fa fa-bars fa-stack-1x" aria-hidden="true"></i>
+          </span>
+      </span>
+  </div>
+</abc-header>
 
 
 <div class="jumbotron">
@@ -13,8 +48,7 @@
 </div>
 
 <p>
-  Abc framework was born early 2017 and it is very new at this time.
-  Please visit www.abcframework.com and leave your comments.
+  Abc framework was born early 2017 and it is very new at this time. Please visit www.abcframework.com and leave your comments.
 </p>
 
 
@@ -27,20 +61,21 @@
 <p>Official Website : www.abcframework.com</p>
 
 
-  <h2>Features of the app</h2>
-  <ul>
-    <li>
-      For design,
-      Bootstrap + ng-bootstrap, Font Awesome, Enhancer
-      Abc component may be separated in another npm module.
-    </li>
-    <li>
-      For backend,
-      Firebase + Angularfire 2
-    </li>
-    <li>
-      User Authentication
-      Basic Authentication with Google Login, Facebook Login, etc. ( based on firebase )
-    </li>
-  </ul>
-  
+<h2>Features of the app</h2>
+<ul>
+  <li>
+    For design, Bootstrap + ng-bootstrap, Font Awesome, Enhancer Abc component may be separated in another npm module.
+  </li>
+  <li>
+    For backend, Firebase + Angularfire 2
+  </li>
+  <li>
+    User Authentication Basic Authentication with Google Login, Facebook Login, etc. ( based on firebase )
+  </li>
+</ul>
+
+<h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1>
+<h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1>
+<h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1>
+<h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1>
+<h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1><h1>1</h1>

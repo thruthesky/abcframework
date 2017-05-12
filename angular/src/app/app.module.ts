@@ -8,7 +8,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { CustomErrorHandler } from './app.error-handler';
 
 // abc componnents. need help here. Make it npm modules or not?
-import { AbcComponents } from './abc-components/abc-components.module';
+//import { AbcComponents } from './abc-components/abc-components.module';
+
+import { AbcComponents } from 'abc-components';
 
 
 // app share service.

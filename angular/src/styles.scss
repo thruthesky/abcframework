@@ -5,6 +5,7 @@ $gutter: 8px;
 $page-width: 1140px;
 
 $header-height: 68px;
+
 body {
     margin-top: $header-height + $gutter!important;
 }
@@ -42,5 +43,28 @@ ng-component {
     h2 {
         font-size: 24px;
         color: #b00;
+    }
+}
+
+
+// home
+.abc-header {
+    font-size: 80%;
+    h1 {
+        font-weight: normal;
+    }
+    .fa-home, .fa-bars {
+        color: slategrey;
+    }
+    .user-icon .fa-circle {
+        color: slategrey;
+    }
+    .right {
+        ul {
+            list-style: none;
+            li {
+                float: left;
+            }
+        }
     }
 }
