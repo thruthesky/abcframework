@@ -7,7 +7,7 @@ Abc framework is a tool that give you a greate convenience on building apps with
 
 Youtube video tutorial)
 
-[![Everything Is AWESOME](https://img.youtube.com/vi/nN3ifO_c05I/0.jpg)](https://www.youtube.com/watch?v=nN3ifO_c05I "Everything Is AWESOME")
+[![Abc framework](https://raw.githubusercontent.com/wiki/thruthesky/abcframework/video.jpg)](https://www.youtube.com/watch?v=nN3ifO_c05I "abc framework")
 
 
 # Open source
