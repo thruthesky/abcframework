@@ -1,0 +1,69 @@
+<nav class="header navbar navbar-toggleable-sm fixed-top">
+    <div class="container">
+
+        <div class="navbar-toggler collapsed navbar-toggler-right" (click)=" showMenu = !showMenu ">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                <i class="fa fa-bars fa-stack-1x" aria-hidden="true"></i>
+            </span>
+        </div>
+
+        <div class="logo" routerLink="/">
+            <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                <i class="fa fa-home fa-stack-1x" aria-hidden="true"></i>
+            </span>
+            ABC
+        </div>
+
+
+        <div class="navbar-collapse collapse" [class.active]="showMenu">
+            <ul class="navbar-nav mr-auto pointers">
+                <li class="nav-item pr-3">
+                    <a href="https://github.com/thruthesky/abcframework" target="_blank">Docs</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="https://github.com/thruthesky/abcframework/issues?q=is%3Aopen+is%3Aissue+label%3A%22help+wanted%22" target="_blank">Q&amp;A Forum</a>
+                </li>
+                <li class="nav-item pr-3">
+                    <a href="https://github.com/thruthesky/abcframework" target="_blank">Quick Start</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav pointers">
+
+                <li *ngIf=" !app.logged " class="nav-item pr-3" routerLink="/login">
+                    Login
+                </li>
+                
+                <li *ngIf=" !app.logged " class="nav-item mr-3" routerLink="/register">
+                    Register
+                </li>
+
+
+                <li *ngIf="app.logged" class="user-icon mr-3" routerLink="/profile" title="{{ app.user.displayName }}">
+                    <span class="fa-stack">
+                            <ng-container *ngIf=" app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <img class="fa fa-stack-1x" style="width: 34px; border-radius: 50%;" src="{{ app.user.photoURL }}">
+                            </ng-container>
+                            <ng-container  *ngIf=" ! app.user.photoURL ">
+                                <i class="fa fa-circle fa-stack-2x" aria-hidden="true"></i>
+                                <i class="fa fa-user fa-stack-1x " aria-hidden="true"></i>
+                            </ng-container>
+                        </span>
+                </li>
+
+
+
+                <li *ngIf=" app.logged " class="mr-md-3 mr-lg-0" (click)=" onClickLogout() ">
+                    <div class="text">Logout</div>
+                </li>
+
+
+
+            </ul>
+        </div>
+
+    </div>
+    
+</nav>

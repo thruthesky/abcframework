@@ -1,10 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
 
+/* VARIABLES */
+
+$sm: 544px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
 
 $gutter: 8px;
-$page-width: 1140px;
+$page-width: $lg;
+$header-height: 60px;
+/* BASE */
 
-$header-height: 68px;
+
+// $gutter: 8px;
+// $page-width: 1140px;
+
+// $header-height: 68px;
 
 body {
     margin-top: $header-height + $gutter!important;
@@ -16,17 +28,13 @@ ng-component {
     margin: 0 auto;
     padding: 0 $gutter;
     max-width: $page-width;
-
     @media all and (min-width: $page-width) {
         padding: 0;
     }
-
     .title {
         font-size: 3em;
     }
 }
-
-
 
 
 #custom-error-handler {
@@ -46,25 +54,3 @@ ng-component {
     }
 }
 
-
-// home
-.abc-header {
-    font-size: 80%;
-    h1 {
-        font-weight: normal;
-    }
-    .fa-home, .fa-bars {
-        color: slategrey;
-    }
-    .user-icon .fa-circle {
-        color: slategrey;
-    }
-    .right {
-        ul {
-            list-style: none;
-            li {
-                float: left;
-            }
-        }
-    }
-}

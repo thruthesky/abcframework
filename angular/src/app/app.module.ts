@@ -10,7 +10,7 @@ import { CustomErrorHandler } from './app.error-handler';
 // abc componnents. need help here. Make it npm modules or not?
 //import { AbcComponents } from './abc-components/abc-components.module';
 
-import { AbcComponents } from 'abc-components';
+//import { AbcComponents } from 'abc-components';
 
 
 // app share service.
@@ -19,6 +19,9 @@ import { App } from './services/app';
 
 // app root component.
 import { AppComponent } from './app.component';
+
+
+import { HeaderComponent } from './components/header/header';
 
 
 // page components.
@@ -48,6 +51,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
+    HeaderComponent,
     HomePage,
     AboutPage,
     LoginPage,
@@ -61,8 +65,7 @@ const appRoutes: Routes = [
     RouterModule.forRoot( appRoutes ),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    AngularFireAuthModule,
-    AbcComponents
+    AngularFireAuthModule
   ],
   providers: [
     App,

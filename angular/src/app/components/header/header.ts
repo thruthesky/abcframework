@@ -3,14 +3,14 @@ import { Router } from '@angular/router';
 import { App } from './../../services/app';
 
 @Component({
-    selector: 'abc-header',
-    templateUrl: 'abc-header.html',
-    styleUrls: [ 'abc-header.scss' ]
+    selector: 'header-component',
+    templateUrl: 'header.html',
+    styleUrls: ['header.scss']
 })
 
-export class AbcHeader implements OnInit {
+export class HeaderComponent implements OnInit {
 
-    showMenu: boolean = false;
+    showMenu: boolean = true;
 
     constructor(
         public app: App,
