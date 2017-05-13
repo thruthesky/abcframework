@@ -22,6 +22,7 @@ import { AppComponent } from './app.component';
 
 
 import { HeaderComponent } from './components/header/header';
+import { UserIconComponent } from './components/user-icon/user-icon';
 
 
 // page components.
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     HeaderComponent,
+    UserIconComponent,
     HomePage,
     AboutPage,
     LoginPage,

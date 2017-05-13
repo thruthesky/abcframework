@@ -10,7 +10,7 @@ import { App } from './../../services/app';
 
 export class HeaderComponent implements OnInit {
 
-    showMenu: boolean = true;
+    showMenu: boolean = false;
 
     constructor(
         public app: App,
