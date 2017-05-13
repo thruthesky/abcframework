@@ -12,6 +12,9 @@ var io = null;
 
 var argv = require('yargs').argv;
 
+var download = require('download-git-repo');
+
+
 
 abc.start = function () {
 
@@ -22,11 +25,11 @@ abc.start = function () {
     // console.log( argv );
 
 
+
     abc.debug(`abc begins with `, argv);
     if (abc.isHelp()) return Q.fcall(abc.help);
-    //else if (abc.isInit()) return Q.fcall(abc.init);
     else if (abc.isNew()) return abc.create();
-    else if (abc.isCopyNodeModules() ) return Q.fcall(abc.copyNodeModules);
+    else if (abc.isCopyNodeModules()) return Q.fcall(abc.copyNodeModules);
     else if (abc.isRun()) return Q.fcall(abc.run);
     else return Q.fcall(abc.unknwonTask);
 
@@ -89,49 +92,75 @@ abc.init = function () {
 /**
  * @note when you work on 'abc framework', you do not need to copy these files.
  */
-abc.npmInstallFilter = function ( src, dst ) {
+abc.npmInstallFilter = function (src, dst) {
 
-    var c = src.substr( src.indexOf('angular') );
-    if ( c.indexOf("node_modules") >= 0 ) return false;
-    if ( c.indexOf("platforms") >= 0 ) return false;
-    if ( c.indexOf("plugins") >= 0 ) return false;
-    if ( c.indexOf("www") >= 0 ) return false; 
+    var c = src.substr(src.indexOf('angular'));
+    if (c.indexOf("node_modules") >= 0) return false;
+    if (c.indexOf("platforms") >= 0) return false;
+    if (c.indexOf("plugins") >= 0) return false;
+    if (c.indexOf("www") >= 0) return false;
     return true;
 }
 
-abc.create = function() {
+abc.create = function () {
 
     var deferred = Q.defer();
     abc.notice("Creating new porject.");
-    let src = __dirname + '/angular';
+    // let src = __dirname + '/angular';
     var dst = argv._[1];
-
-
-   try {
-        abc.notice(`Going to copy files from ${src} to ${dst}`);
-        fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
-        if ( fs.existsSync( dst ) ) {
-            fs.ensureDirSync(`${dst}/www`);
-            abc.notice("ABC base files are copied.");
-         }
-        else {
-            abc.error("Failed to copy files");
-            deferred.reject( new Error(`${dst} does not exists`) );
-            return deferred.promise;
-        }
-    }
-    catch ( err ) {
-        deferred.reject( new Error( err ) ); // error.
+    if (!dst) {
+        deferred.reject(new Error("Input project name."));
         return deferred.promise;
     }
-    abc.notice(`Installing npm modules on ${dst} for abc.`);
+
+    var template = 'thruthesky/default';
 
 
-    process.chdir( dst );
-    abc.npmInstall( code => {
-        abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
-        deferred.resolve();
+
+    //    try {
+    //         abc.notice(`Going to copy files from ${src} to ${dst}`);
+    //         fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
+    //         if ( fs.existsSync( dst ) ) {
+    //             fs.ensureDirSync(`${dst}/www`);
+    //             abc.notice("ABC base files are copied.");
+    //          }
+    //         else {
+    //             abc.error("Failed to copy files");
+    //             deferred.reject( new Error(`${dst} does not exists`) );
+    //             return deferred.promise;
+    //         }
+    //     }
+    //     catch ( err ) {
+    //         deferred.reject( new Error( err ) ); // error.
+    //         return deferred.promise;
+    //     }
+
+    // // npm install
+    // abc.notice(`Installing npm modules on ${dst} for abc.`);
+    // process.chdir( dst );
+    // abc.npmInstall( code => {
+    //     abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
+    //     deferred.resolve();
+    // });
+    abc.notice(`Downloading template: https://github.com/${template}.`);
+    download(template, dst, e => {
+        if (e) {
+            deferred.reject(new Error(e));
+            return;
+        }
+        abc.notice("Template downloadted.");
+        // npm install
+        abc.notice(`Installing npm modules on ${dst} for abc.`);
+        process.chdir(dst);
+        abc.npmInstall(code => {
+            abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
+            deferred.resolve();
+        });
+
     });
+
+
+
 
     return deferred.promise;
 }
@@ -140,28 +169,28 @@ abc.create = function() {
 
 
 
-abc.copyNodeModules = function() {
-    
+abc.copyNodeModules = function () {
+
     abc.notice("Copying node_modules folder");
     let src = __dirname + '/angular/node_modules';
     var dst = './node_modules';
 
     try {
-        fs.copySync( src, dst );
+        fs.copySync(src, dst);
     }
-    catch ( err ) {
-        deferred.reject( new Error( err ) ); // error.
+    catch (err) {
+        deferred.reject(new Error(err)); // error.
     }
     abc.notice(`done.`);
 }
 
 
 
-abc.npmInstall = function(callback) {
+abc.npmInstall = function (callback) {
 
-    if ( abc.skipNpmInstall() ) {
+    if (abc.skipNpmInstall()) {
         abc.notice("--skip-npm-install: skip npm install");
-        return callback( 1 );
+        return callback(1);
     }
     let ls = spawn('npm', ['install', '--verbose']);
 
@@ -174,7 +203,7 @@ abc.npmInstall = function(callback) {
     });
 
     ls.on('close', (code) => {
-        callback( code );
+        callback(code);
     });
 }
 
@@ -443,8 +472,8 @@ abc.getBaseHref = function () {
 }
 
 abc.getAddress = function () {
-    if ( argv['address'] ) return argv['address'];
-    if ( argv._[1] == 'android' ) return '10.0.2.2';
+    if (argv['address']) return argv['address'];
+    if (argv._[1] == 'android') return '10.0.2.2';
     else return 'localhost';
 }
 abc.getPort = function () {
