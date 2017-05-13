@@ -83,12 +83,6 @@ abc.init = function () {
 }
 
 
-
-
-
-
-
-
 /**
  * @note when you work on 'abc framework', you do not need to copy these files.
  */
@@ -113,7 +107,8 @@ abc.create = function () {
         return deferred.promise;
     }
 
-    var template = 'thruthesky/default';
+    var template = abc.getTemplate();
+
 
 
 
@@ -483,6 +478,11 @@ abc.getPort = function () {
 
 abc.getOs = function () {
     return argv._[1];
+}
+
+abc.getTemplate = function() {
+    if (argv['template']) return argv['template'];
+    else return 'thruthesky/default';
 }
 
 
