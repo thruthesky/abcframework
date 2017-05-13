@@ -44,4 +44,4 @@ Abc framework is open sourced under [MIT License](https://github.com/thruthesky/
 
 # For core developers
 
-To become core developer, please refer [for core developer](https://github.com/thruthesky/abcframework/wiki/core-developer).
+To become core developer, please refer [for core developer](https://github.com/thruthesky/abcframework/wiki/Core-Developers).
