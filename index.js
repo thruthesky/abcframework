@@ -28,6 +28,8 @@ abc.start = function () {
 
     abc.debug(`abc begins with `, argv);
     if (abc.isHelp()) return Q.fcall(abc.help);
+    else if ( abc.isInit() ) return abc.init();
+    else if ( abc.isReset() ) return abc.init( false );
     else if (abc.isNew()) return abc.create();
     else if (abc.isCopyNodeModules()) return Q.fcall(abc.copyNodeModules);
     else if (abc.isRun()) return Q.fcall(abc.run);
@@ -49,37 +51,40 @@ abc.help = function () {
     abc.notice(`abc run ios|android|browser [--base-href][--address=...][--port=....]\t - To run or watch Angular project on device.`);
 }
 
-abc.init = function () {
-    abc.notice(`abc: goint to initialize Cordova on Angular project.`);
-    if (!abc.hasForce() && !fs.existsSync('./node_modules')) {
-        throw new Error("You are not in Angular project folder. If you want to initialize, do it with " + red("--force") + ".");
-    }
-    if (!abc.hasReset() && fs.existsSync('./config.xml')) {
-        throw new Error(green("Cordova is already initialized. If you want to reset, do it with " + red("--reset") + "."));
-    }
 
 
-    let src = __dirname + '/copy/' + abc.version();
-    let dst = '.';
-    // fs.copy( src, dst )
-    //     .then( () => {
-    //         abc.notice("abc: init success!");
-    //     } )
-    //     .catch( e => {
-    //         throw new Error( e );
-    //     });
+abc.init = function ( check = true ) {
+    var d = Q.defer();
+
+    setTimeout(()=>{
+        abc.notice(`abc: going to initialize Cordova on Angular project.`);
+        if (!abc.hasForce() && !fs.existsSync('./node_modules')) {
+            d.reject(new Error(`You are not in Angular project. Use --force if you want to continue.`));
+            return;
+        }
+        if ( check && fs.existsSync('config.xml') && fs.existsSync('www') ) {
+            d.reject(new Error(green("Cordova is already initialized. If you want to reset, 'abc reset'.")));
+            return;
+        }
+
+        let src = __dirname + '/cordova/config.xml';
+        let dst = 'config.xml';
 
 
-    try {
-        abc.debug(`copying resources from ${src} to ${dst}.`);
-        fs.copySync(src, dst)
-        abc.notice("abc: init success!")
-    }
-    catch (err) {
-        err.message += ' ' + red(`You must do "abc init --reset" to complete initializiation.`);
-        throw new Error(err);
-    };
+        try {
+            abc.debug(`copying resources from ${src} to ${dst}.`);
+            fs.copySync(src, dst)
+            fs.ensureDirSync('www')
+            abc.notice("abc: success!")
+            d.resolve();
+        }
+        catch (err) {
+            err.message += ' ' + red(`failed to initialize.`);
+            d.reject( err );
+        };
+    }, 100);
 
+    return d.promise;
 }
 
 
@@ -431,9 +436,12 @@ abc.debug = function (msg) {
 abc.isHelp = function () {
     if (argv.help || argv.h) return true;
 };
-// abc.isInit = function () {
-//     return Array.from(argv._).findIndex(v => v == 'init') != -1;
-// };
+abc.isInit = function () {
+    return argv._[0] == 'init';
+};
+abc.isReset = function () {
+    return argv._[0] == 'reset';
+};
 abc.isNew = function () {
     return argv._[0] == 'new';
 };
@@ -446,7 +454,6 @@ abc.skipNpmInstall = function () {
 abc.isRun = function () { return argv._[0] == 'run'; }
 abc.isDebug = function () { if (argv.debug || argv.d) return true; }
 
-abc.hasReset = function () { return argv.reset; }
 abc.hasForce = function () { return argv.force; }
 
 abc.hasAot = function () { return argv['aot']; }
