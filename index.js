@@ -3,6 +3,7 @@ const Q = require('q');
 const fs = require('fs-extra')
 const chalk = require('chalk');
 const spawn = require('cross-spawn').spawn;
+const package = require('./package');
 
 var finalhandler = require('finalhandler')
 var http = require('http')
@@ -28,6 +29,7 @@ abc.start = function () {
 
     abc.debug(`abc begins with `, argv);
     if (abc.isHelp()) return Q.fcall(abc.help);
+    else if ( abc.hasVersion() ) return Q.fcall( () => console.log(package.version) );
     else if ( abc.isInit() ) return abc.init();
     else if ( abc.isReset() ) return abc.init( false );
     else if (abc.isNew()) return abc.create();
@@ -457,6 +459,7 @@ abc.isDebug = function () { if (argv.debug || argv.d) return true; }
 abc.hasForce = function () { return argv.force; }
 
 abc.hasAot = function () { return argv['aot']; }
+abc.hasVersion = function () { return argv['v'] || argv['version']; }
 
 
 abc.getBaseHref = function () {
