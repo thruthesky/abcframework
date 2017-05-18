@@ -28,7 +28,7 @@ abc.start = function () {
 
 
     abc.debug(`abc begins with `, argv);
-    if (abc.isHelp()) return Q.fcall(abc.help);
+    if (abc.hasHelp()) return abc.help();
     else if ( abc.hasVersion() ) return Q.fcall( () => console.log(package.version) );
     else if ( abc.isInit() ) return abc.init();
     else if ( abc.isReset() ) return abc.init( false );
@@ -47,7 +47,7 @@ abc.version = function () {
     return '20170505';
 }
 abc.help = function () {
-    abc.notice(red('abc') + " version: " + green(abc.version()));
+    abc.notice(red('abc') + " version: " + green( package.version ));
     abc.notice(`abc init\t- To initialize cordova platform on Angular project.`);
     abc.notice(`cordova platform add android|browser|ios\t - To install Cordova platform.`);
     abc.notice(`abc run ios|android|browser [--base-href][--address=...][--port=....]\t - To run or watch Angular project on device.`);
@@ -119,31 +119,6 @@ abc.create = function () {
 
 
 
-    //    try {
-    //         abc.notice(`Going to copy files from ${src} to ${dst}`);
-    //         fs.copySync( src, dst, { filter: abc.npmInstallFilter } );
-    //         if ( fs.existsSync( dst ) ) {
-    //             fs.ensureDirSync(`${dst}/www`);
-    //             abc.notice("ABC base files are copied.");
-    //          }
-    //         else {
-    //             abc.error("Failed to copy files");
-    //             deferred.reject( new Error(`${dst} does not exists`) );
-    //             return deferred.promise;
-    //         }
-    //     }
-    //     catch ( err ) {
-    //         deferred.reject( new Error( err ) ); // error.
-    //         return deferred.promise;
-    //     }
-
-    // // npm install
-    // abc.notice(`Installing npm modules on ${dst} for abc.`);
-    // process.chdir( dst );
-    // abc.npmInstall( code => {
-    //     abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
-    //     deferred.resolve();
-    // });
     abc.notice(`Downloading template: https://github.com/${template}.`);
     download(template, dst, e => {
         if (e) {
@@ -435,7 +410,7 @@ abc.debug = function (msg) {
 
 /// argument
 
-abc.isHelp = function () {
+abc.hasHelp = function () {
     if (argv.help || argv.h) return true;
 };
 abc.isInit = function () {
