@@ -29,13 +29,13 @@ abc.start = function () {
 
     abc.debug(`abc begins with `, argv);
     if (abc.hasHelp()) return abc.help();
-    else if ( abc.hasVersion() ) return Q.fcall( () => console.log(package.version) );
+    else if ( abc.hasVersion() ) return (() => console.log(package.version))();
     else if ( abc.isInit() ) return abc.init();
     else if ( abc.isReset() ) return abc.init( false );
     else if (abc.isNew()) return abc.create();
-    else if (abc.isCopyNodeModules()) return Q.fcall(abc.copyNodeModules);
-    else if (abc.isRun()) return Q.fcall(abc.run);
-    else return Q.fcall(abc.unknwonTask);
+    else if (abc.isRun()) return abc.run();
+    else return abc.unknwonTask();
+
 
 
 
@@ -56,16 +56,16 @@ abc.help = function () {
 
 
 abc.init = function ( check = true ) {
-    var d = Q.defer();
+    
 
     setTimeout(()=>{
-        abc.notice(`abc: going to initialize Cordova on Angular project.`);
+        // abc.notice(`abc: going to initialize Cordova on Angular project.`);
         if (!abc.hasForce() && !fs.existsSync('./node_modules')) {
-            d.reject(new Error(`You are not in Angular project. Use --force if you want to continue.`));
+            abc.notice(`You are not in Angular project. Use --force if you want to continue.`);
             return;
         }
         if ( check && fs.existsSync('config.xml') && fs.existsSync('www') ) {
-            d.reject(new Error(green("Cordova is already initialized. If you want to reset, 'abc reset'.")));
+            abc.notice("Cordova is already initialized. If you want to reset, 'abc reset'.");
             return;
         }
 
@@ -78,15 +78,14 @@ abc.init = function ( check = true ) {
             fs.copySync(src, dst)
             fs.ensureDirSync('www')
             abc.notice("abc: success!")
-            d.resolve();
         }
         catch (err) {
             err.message += ' ' + red(`failed to initialize.`);
-            d.reject( err );
+            abc.error( err );
         };
     }, 100);
 
-    return d.promise;
+
 }
 
 
@@ -105,60 +104,29 @@ abc.npmInstallFilter = function (src, dst) {
 
 abc.create = function () {
 
-    var deferred = Q.defer();
-    abc.notice("Creating new porject.");
+
+    abc.notice("Creating an ABC porject.");
     // let src = __dirname + '/angular';
     var dst = argv._[1];
-    if (!dst) {
-        deferred.reject(new Error("Input project name."));
-        return deferred.promise;
-    }
+    if (!dst) return abc.error("Input project name.");
+    
 
     var template = abc.getTemplate();
 
-
-
-
     abc.notice(`Downloading template: https://github.com/${template}.`);
+
     download(template, dst, e => {
-        if (e) {
-            deferred.reject(new Error(e));
-            return;
-        }
-        abc.notice("Template downloadted.");
+        if (e) return abc.error( e );
+        abc.notice("Template downloaded.");
         // npm install
-        abc.notice(`Installing npm modules on ${dst} for abc.`);
+        abc.notice(`Installing npm modules on ${dst} for abc tooling.`);
         process.chdir(dst);
         abc.npmInstall(code => {
-            abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
-            deferred.resolve();
+            return abc.notice(`abc has been created successfully. type "cd ${dst}; ng serve" to run the app.`);
         });
 
     });
 
-
-
-
-    return deferred.promise;
-}
-
-
-
-
-
-abc.copyNodeModules = function () {
-
-    abc.notice("Copying node_modules folder");
-    let src = __dirname + '/angular/node_modules';
-    var dst = './node_modules';
-
-    try {
-        fs.copySync(src, dst);
-    }
-    catch (err) {
-        deferred.reject(new Error(err)); // error.
-    }
-    abc.notice(`done.`);
 }
 
 
@@ -185,11 +153,31 @@ abc.npmInstall = function (callback) {
 }
 
 
+
+// abc.copyNodeModules = function () {
+
+
+//     let src = __dirname + '/angular/node_modules';
+//     var dst = './node_modules';
+//     abc.notice(`Copying node_modules folder from ${src} to ${dst}`);
+
+//     try {
+//         fs.copySync(src, dst);
+//     }
+//     catch (err) {
+//         return abc.error( err );
+//     }
+//     abc.notice(`done.`);
+// }
+
+
+
+
 abc.run = function () {
     abc.ngBuild = null;
     var os = abc.getOs();
 
-    if (!os) throw new Error("OS is not provided.");
+    if (!os) return abc.error("OS is not provided.");
 
     abc.debug(`ng build option`);
 
@@ -422,9 +410,9 @@ abc.isReset = function () {
 abc.isNew = function () {
     return argv._[0] == 'new';
 };
-abc.isCopyNodeModules = function () {
-    return argv._[0] == 'copy-node-modules'
-};
+// abc.isCopyNodeModules = function () {
+//     return argv._[0] == 'copy-node-modules'
+// };
 abc.skipNpmInstall = function () {
     return argv['skip-npm-install'];
 };
