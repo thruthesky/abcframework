@@ -31,9 +31,10 @@ Abc framework is open sourced under [MIT License](https://github.com/thruthesky/
 
 
 
-# Installation &amp; Update
+# [Installation &amp; Update](https://github.com/thruthesky/abcframework/wiki/Installation)
 
-* [Installation &amp; Update](https://github.com/thruthesky/abcframework/wiki/Installation)
+See [Installation &amp; Update](https://github.com/thruthesky/abcframework/wiki/Installation) wiki page to know about abc installation and update.
+
 
 
 
