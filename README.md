@@ -39,6 +39,9 @@ Abc framework is open sourced under [MIT License](https://github.com/thruthesky/
 
 # [Tips](https://github.com/thruthesky/abcframework/wiki/Tips)
 
+See the [Tips](https://github.com/thruthesky/abcframework/wiki/Tips) to get some tricks about abc.
+
+
 
 # [Known Problems](https://github.com/thruthesky/abcframework/wiki/Know-Problems)
 
