@@ -11,9 +11,9 @@ Youtube video tutorial)<br>
 <a href="https://www.youtube.com/watch?v=nN3ifO_c05I" target="_blank"><img src="https://raw.githubusercontent.com/wiki/thruthesky/abcframework/video.jpg?dummy=1" alt="IMAGE ALT TEXT HERE" width="400"/></a>
 
 
-# Quick Start
+# [Quick Start](https://github.com/thruthesky/abcframework/wiki/Quick-Start)
 
-* [Quick Start](https://github.com/thruthesky/abcframework/wiki/Quick-Start)
+Please refer [Quick Start](https://github.com/thruthesky/abcframework/wiki/Quick-Start) to begin with `abc`.
 
 
 # Open source
@@ -46,6 +46,6 @@ Abc framework is open sourced under [MIT License](https://github.com/thruthesky/
 * [Uncaught TypeError: Cannot read property 'apply' of undefined](https://github.com/thruthesky/abcframework/wiki/Know-Problems#uncaught-typeerror-cannot-read-property-apply-of-undefined)
 
 
-# For core developers
+# [For core developers](https://github.com/thruthesky/abcframework/wiki/Core-Developers)
 
-To become core developer, please refer [for core developer](https://github.com/thruthesky/abcframework/wiki/Core-Developers).
+Please don't hesitate to edit core code. Refer [for core developer](https://github.com/thruthesky/abcframework/wiki/Core-Developers) to dig into the abc.
