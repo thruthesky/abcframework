@@ -37,9 +37,13 @@ Abc framework is open sourced under [MIT License](https://github.com/thruthesky/
 
 
 
-# Tips
+# [Tips](https://github.com/thruthesky/abcframework/wiki/Tips)
 
-* [Tips](https://github.com/thruthesky/abcframework/wiki/Tips)
+
+# [Known Problems](https://github.com/thruthesky/abcframework/wiki/Know-Problems)
+
+
+* [Uncaught TypeError: Cannot read property 'apply' of undefined](https://github.com/thruthesky/abcframework/wiki/Know-Problems#uncaught-typeerror-cannot-read-property-apply-of-undefined)
 
 
 # For core developers
