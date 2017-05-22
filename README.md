@@ -2,7 +2,7 @@
 
 # ABC Framework
 
-Abc framework( `abc` for short ) is a tool that gives you a greate convenience on building apps with Angular 2+.
+Abc framework( `abc` for short ) is a tool for bunding Angular app for Cordova whic gives you a great convenience on building apps with Angular 2+.
 
 
 
