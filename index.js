@@ -36,9 +36,6 @@ abc.start = function () {
     else if (abc.isRun()) return abc.run();
     else return abc.unknwonTask();
 
-
-
-
 }
 
 
@@ -60,7 +57,7 @@ abc.init = function ( check = true ) {
             return;
         }
         if ( check && fs.existsSync('config.xml') ) {
-            abc.notice("config.xml exists. to init, remove config.xml");
+            abc.notice("Look! config.xml exists. It looks like abc has already initialized. Try to run `abc run ...`");
             return;
         }
 
