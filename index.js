@@ -42,10 +42,6 @@ abc.start = function () {
 }
 
 
-
-abc.version = function () {
-    return '20170505';
-}
 abc.help = function () {
     abc.notice(red('abc') + " version: " + green( package.version ));
     abc.notice(`abc init\t- To initialize cordova platform on Angular project.`);
@@ -57,15 +53,14 @@ abc.help = function () {
 
 abc.init = function ( check = true ) {
     
-
     setTimeout(()=>{
         // abc.notice(`abc: going to initialize Cordova on Angular project.`);
         if (!abc.hasForce() && !fs.existsSync('./node_modules')) {
             abc.notice(`You are not in Angular project. Use --force if you want to continue.`);
             return;
         }
-        if ( check && fs.existsSync('config.xml') && fs.existsSync('www') ) {
-            abc.notice("Cordova is already initialized. If you want to reset, 'abc reset'.");
+        if ( check && fs.existsSync('config.xml') ) {
+            abc.notice("config.xml exists. to init, remove config.xml");
             return;
         }
 
