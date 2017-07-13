@@ -193,10 +193,13 @@ abc.run = function () {
     if (proc === void 0) return abc.error(`Failed to created build process for ${os}. Check if ${os} is a supported platform and the platform is added to the project.`);
     proc.stdout.on('data', abc.watchOut);
     proc.stderr.on('data', abc.watchOut);
-    proc.on('close', (code) => { }); // watch 를 하므로, 프로세스가 종료되지 않는다.
+    // proc.on('close', (code) => { }); // this will not be called since it is going to watch.
 
 }
 
+/**
+ * When 
+ */
 abc.watchOut = function (data) {
     var s = data.toString();
     abc.stdout(s);
@@ -262,7 +265,7 @@ abc.runServer = function () {
 
     // Listen
     server.listen(abc.getPort())
-    abc.notice("Listening on " + abc.getPort());
+    abc.notice("Listening on " + abc.getPort() + ", Server Address: http://" + abc.getAddress() + ":" + abc.getPort());
 
 }
 
@@ -270,6 +273,12 @@ abc.runServer = function () {
 abc.patchIndex = function () {
 
 
+    if ( abc.indexPatched ) {
+        console.log("index patched. ... return");
+        return;
+    }
+    
+    abc.indexPatched = true;
 
     var address = abc.getAddress();
     var port = abc.getPort();
@@ -324,12 +333,14 @@ abc.patchIndex = function () {
 
     content = content.replace("</body>", patch + "\n</body>");
     fs.writeFileSync('www/index.html', content);
-    if (io) io.emit('reload', { data: 'reload now' });
 }
 
 abc.runCordova = function () {
 
-    abc.patchIndex();
+    abc.patchIndex(); //
+
+
+    if (io) io.emit('reload', { data: 'reload now' }); // reload the app.
 
     if (abc.bRunServer !== void 0) return;
     else abc.bRunServer = true;
